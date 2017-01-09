@@ -9,12 +9,12 @@ public class Woo{
     public static final String esc = (char)27 + "[";
 
     public static void main( String[] args ){
-        System.out.print( esc + "2J" + esc + ";H" ); //Clear screen, then move cursor to top left corner
+        System.out.print( esc + "2J" + esc + ";H" ); // 2J = Clear screen; ;H = move cursor to top left corner
 
         //Define 2d array for the gems and then print it
-        Gem[][] arr = new Gem[20][20];
-        Gem.populate( arr );
-        System.out.println( Gem.arrToStr( arr ) + "\n"  );
+        Gem[][] board = new Gem[20][20];
+        Gem.populate( board );
+        System.out.println( Gem.arrToStr( board ) + "\n"  );
         
         //Declare a scanner and a variable to hold values
         Scanner sc = new Scanner( System.in );
@@ -25,23 +25,23 @@ public class Woo{
         int col = 2;
 
         while( true ){
-            System.out.print( esc + "K" + "Input (w/a/s/d): " ); //Clear line and print prompt
+            System.out.print( esc + "K" + "Input (w/a/s/d): " ); // K = Clear line; print prompt
             s = sc.nextLine(); //Get input
-            System.out.print( esc + "1A" ); //Move cursor back up 1 row since sc.nextLine() moves it down one row
+            System.out.print( esc + "1A" ); // 1A = Move cursor back up 1 row (since sc.nextLine() moves it down one row)
             
-            System.out.print( esc + "s" ); //Save position of prompt for later
+            System.out.print( esc + "s" ); // s = Save position of prompt for later
             //Todo: make a method that overwrites the gem at the current or given position. Should replace the next two lines
-            System.out.print( esc + ( row + 1 ) + ";" + ( 2 * col + 1 ) + "H" ); //Move to position of current gem object
-            System.out.print( esc + "0m" + arr[row][col] ); //Overwrite it with no background color
+            System.out.print( esc + ( row + 1 ) + ";" + ( 2 * col + 1 ) + "H" ); // line|col|H = Move to position of current gem object
+            System.out.print( esc + "0m" + board[row][col] ); //Overwrite it with no background color
 
             //This block handles input
             if( s.equals("w") && row > 0 ){
                 row--;
-            } else if( s.equals("s") && row < arr.length - 1 ){
+            } else if( s.equals("s") && row < board.length - 1 ){
                 row++;
             } else if( s.equals("a") && col > 0 ){
                 col--;
-            } else if( s.equals("d") && col < arr[row].length - 1 ){
+            } else if( s.equals("d") && col < board[row].length - 1 ){
                 col++;
             } else {
                 System.out.print( esc + "u" + "Input or move invalid. Press enter to continue. " );
@@ -51,7 +51,7 @@ public class Woo{
 
 
             System.out.print( esc + ( row + 1 ) + ";" + ( 2 * col + 1 ) + "H" ); //Move to position of current gem object
-            System.out.print( esc + "41m" + arr[row][col] + esc + "0m" ); //Overwrite it with a background color
+            System.out.print( esc + "41m" + board[row][col] + esc + "0m" ); //Overwrite it with a background color
             
             System.out.print( esc + "u" ); //Move cursor back to prompt
         }
