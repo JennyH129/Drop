@@ -1,5 +1,5 @@
-Jenny Han, Levi Olevsky, Arif Roktim
-APCS1
+Team Drop -- Jenny Han, Levi Olevsky, Arif Roktim
+APCS1 pd4
 HW57 --  ...and Keeping It Pointed Up
 2017-1-10
 
@@ -11,12 +11,12 @@ To Do List
 5- Swap gems
 6- Check for chains of gems
 7- Replace removed chains with new random gems
-8- Special gems (abstract superclass and each special should have its own shape)
+8- Special gems
    a- Destroy gems in same row/column (CrossGem)
    b- Destroy gems of the same color (ColorGem)
 9- Add locked gems (not a subclass)
 10- Limit the number of moves
-11- Have gems ¡°fall down¡± to replace removed chains. New random gems fill in from top
+11- Have gems "fall down" to replace removed chains. New random gems fill in from top
 12- Add point system -- User will gain points for each gem destroyed
 13- Add a shop -- User can buy power-ups from shop with points earned
 14- Add a special gem that destroys surrounding gems -- i.e., the gem explodes
