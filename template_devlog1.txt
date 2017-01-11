@@ -1,10 +1,10 @@
-<Team Name>
-<Member 0 Name>
-<Member 1 Name>
-<Member 2 Name>
-pd <pd#>
+Drop
+Jenny Han
+Levi Olevsky
+Arif Roktim
+pd 4
 ---------------------
-<Project>
+Bejeweled
 
 
 Suggested usage: 
