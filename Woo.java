@@ -40,8 +40,8 @@ public class Woo{
         String s;
 
         //Initial cursor points
-        int row = 2;
-        int col = 2;
+        int row = 0;
+        int col = 0;
 
         while( true ){
             System.out.print( esc + "K" + "Input (w/a/s/d): " ); // K = Clear line; print prompt
