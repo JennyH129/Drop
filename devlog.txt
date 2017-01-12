@@ -48,6 +48,11 @@ Arif Roktim :: Coded basic Gem class.
 	       Coded board updating for gem selection.
 ==============================================================
 
+2017-01-12
+--------------------------------------------------------------
+Arif Roktim and Levi Olevsky:: Completed class gem and added coloring, moved populate and arrToStr to Woo.java
+==============================================================
+
 yyyy-mm-dd
 --------------------------------------------------------------
 Arif Roktim :: <Thing member did.>
