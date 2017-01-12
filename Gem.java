@@ -1,28 +1,21 @@
 public class Gem{
 
+    private int color;
+    private boolean locked;
+    
+    public Gem(int newColor){
+	color = newColor;
+    }
 
     public String toString(){
-        return "*";
+        return Woo.esc + color + "m*" + Woo.esc + "0m";
     }
     
-    public static String arrToStr( Gem[][] arr ){
-        String retStr = "";
-        for( Gem[] row: arr ){
-            for( Gem gem: row ){
-                retStr += gem.toString() + " ";
-            }
-            retStr += "\n";
-        }
-        return retStr;
+    public boolean equals(Gem other){
+	return color == other.color;
     }
 
-    public static void populate( Gem[][] arr ){
-        for( int i = 0; i < arr.length; i++ ){
-            for( int j = 0; j < arr[i].length; j++ ){
-                arr[i][j] = new Gem();
-            }
-        }
+    public int getColor(){
+	return color;
     }
-
-
 }
