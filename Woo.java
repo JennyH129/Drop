@@ -74,22 +74,5 @@ public class Woo{
             
             System.out.print( esc + "u" ); //Move cursor back to prompt
         }
-
-        /*
-	  System.out.println( "bobobobobobobobobobobobobobobobobbobobobobobobobobobo" );
-	  System.out.println( "bobobobobobobobobobobobobobobobobbobobobobobobobobobo" );
-	  System.out.println( "bobobobobobobobobobobobobobobobobbobobobobobobobobobo" );
-	  System.out.println( "bobobobobobobobobobobobobobobobobbobobobobobobobobobo" );
-	  //Testing out the usage of ANSI escape sequences
-	  System.out.print( esc + "s" ); //Saves the current position of the cursor on the screen.
-	  System.out.print( esc + "3A" ); //Moves the curson up four lines from the current position
-	  System.out.print( esc + "30C" ); //Moves the curson right 10 characters
-
-	  System.out.print( esc + "46m" ); //Makes are characters printed from now on have a cyan colored background
-	  System.out.print( "im printing up 3 lines and 40 characters right!" ); //Print stuff
-	  System.out.print( esc + "0m" ); //Resets the background color for future characters
-
-	  System.out.print( esc + "u" ); //Moves the cursor back to the saved position
-        */
     }
 }
