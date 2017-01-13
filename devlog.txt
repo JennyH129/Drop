@@ -10,11 +10,13 @@ Bejeweled
 ------------------------------------------
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+Managed to somewhat achieve MVP in time.
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+Only chains of 3 gems are recoginized. 
+Chains are only recognized if one of the gems swapped was the middle gem of the chain of 3.
+The board starts off with chains already in it.
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -26,7 +28,8 @@ MID-DEVELOPMENT DESIGN CHANGES
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+Incremental development is very important.
+Diagnostic print statements are very useful.
 ||||||||||||||||||||||||||||||||||||||||||
 
 
@@ -43,15 +46,14 @@ LESSONS LEARNED
 
 2017-01-05
 --------------------------------------------------------------
-Arif Roktim :: Coded basic Gem class.
-     	       Let user input.
-	       Coded board updating for gem selection.
+Arif Roktim :: Coded basic Gem class. Let user input. Coded board updating for gem selection.
 ==============================================================
 
 2017-01-12
 --------------------------------------------------------------
 Arif Roktim and Levi Olevsky:: Completed class gem and added coloring, moved populate and arrToStr to Woo.java
 Jenny Han:: Wrote method swap and chainCheck 
+All ::  Let user select gems to swap. Detected some chains and replaced them with new random gems. Chain detection is a WIP.
 ==============================================================
 
 yyyy-mm-dd
