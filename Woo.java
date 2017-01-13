@@ -144,10 +144,10 @@ public class Woo{
         int[][] sGem = new int[2][2];
 
 
-        while( numMoves < 3 ){
+        while( numMoves < 4 ){
 
 
-            while( numSelectedGems < 4 ){
+            while( numSelectedGems < 2 ){
                 //Get user input
                 System.out.print( esc + "K" + "Input: " ); // K = Clear line; print prompt
                 s = sc.nextLine(); //Get input
