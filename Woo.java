@@ -62,24 +62,12 @@ public class Woo{
 
     //Excludes current gem
     public static ArrayList<Integer[]> chainItemsH( Gem[][] arr, int row, int col ){
-        
         ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
-        //row and col of other gem
-        int oRow = row;
-        int oCol = col;
-
-        //Check gems to left of current gem
-        System.out.println( arr[row][col] );
-        System.out.println( arr[row][col - 1] );
-        while( oCol > 0 && arr[row][col].equals( arr[oRow][ oCol - 1 ] ) ){
-            retArr.add( new Integer[]{ oRow, oCol - 1 } );
-        }
-
-        oRow = row;
-        oCol = col;
-
-        while( oCol < arr[oRow].length && arr[row][col].equals( arr[oRow][ oCol + 1 ] ) ){
-            retArr.add( new Integer[]{ oRow, oCol + 1 } );
+        if( ( col > 0                   &&  arr[row][col].equals( arr[row][col - 1] )) && 
+            ( col < arr[0].length - 1   &&  arr[row][col].equals( arr[row][col + 1] )) ){
+            retArr.add( new Integer[] { row, col } );
+            retArr.add( new Integer[] { row, col - 1 } );
+            retArr.add( new Integer[] { row, col + 1 } );
         }
         
         return retArr;
@@ -87,135 +75,66 @@ public class Woo{
 
     //Excludes current gem
     public static ArrayList<Integer[]> chainItemsV( Gem[][] arr, int row, int col ){
-        
         ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
-        //row and col of other gem
-        int oRow = row;
-        int oCol = col;
-
-        while( oRow > 0 && arr[row][col].equals( arr[ oRow - 1 ][oCol] ) ){
-            retArr.add( new Integer[]{ oRow - 1 , oCol } );
+        if( ( row > 0               &&  arr[row][col].equals( arr[row - 1][col] )) && 
+            ( row < arr.length - 1  &&  arr[row][col].equals( arr[row + 1][col] )) ){
+            retArr.add( new Integer[] { row, col } );
+            retArr.add( new Integer[] { row - 1, col } );
+            retArr.add( new Integer[] { row + 1, col } );
         }
-
-        oRow = row;
-        oCol = col;
-
-        while( oRow < arr.length && arr[row][col].equals( arr[ oRow + 1 ][oCol] ) ){
-            retArr.add( new Integer[]{ oRow + 1 , oCol } );
-        }
-
+        
         return retArr;
     }
 
     public static ArrayList<Integer[]> chainItems( Gem[][] arr, int row, int col ){
-        ArrayList<Integer[]> arrH =  chainItemsH( arr, row, col );
-        ArrayList<Integer[]> arrV =  chainItemsV( arr, row, col );
-
+        ArrayList<Integer[]> hChain = chainItemsH( arr, row, col );
+        ArrayList<Integer[]> vChain = chainItemsV( arr, row, col );
         ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
-        retArr.add( new Integer[]{ row, col } );
-
-        if( arrH.size() >= 2 ){
-            for( Integer[] i: arrH ){ retArr.add( i ); }
+        //combine horizontal and vertical chains
+        if( hChain.size() >= 3 ){
+            for( Integer[] i: hChain ){ retArr.add( i ); }
         }
-
-        if( arrV.size() >= 2 ){
-            for( Integer[] i: arrV ){ retArr.add( i ); }
+        if( vChain.size() >= 3 ){
+            for( Integer[] i: vChain ){ retArr.add( i ); }
         }
-
-        /*
-        for( Integer[] j: retArr ){
-            for( Integer i: j ){
-                System.out.print( i + " " );
-            }
-            System.out.println();
-        }
-        */
 
         return retArr;
     }
 
-    public static boolean chainCheck (Gem [][] arr, int row1, int column1, int row2, int column2) {
-        boolean bool = false;
-        //checks for vertical chain around gem1
-        if (arr[row1][column1].equals (arr[row1 + 1][column1])) {
-            if (arr [row1][column1].equals (arr[row1 + 2][column1])){
-                bool = true;
-            }
-            else if (arr [row1][column1].equals (arr[row1 -1] [column1])) {
-                bool = true;
-            }
-        }
-        if (arr[row1][column1].equals (arr[row1 -1][column1])) {
-            if (arr [row1][column1].equals (arr[row1 -2][column1])){
-                bool = true;
-            }
-        }
-        //checks for horizontal chain around gem1
-        if (arr[row1][column1].equals (arr[row1][column1+1])) {
-            if (arr [row1][column1].equals (arr[row1][column1+2])){
-                bool = true;
-            }
-            else if (arr [row1][column1].equals (arr[row1] [column1-1])) {
-                bool = true;
-            }
-        }
-
-        if (arr[row1][column1].equals (arr[row1][column1-1])) {
-            if (arr [row1][column1].equals (arr[row1][column1-2])){
-                bool = true;
-            }
-        }
-        //checks for vertical chain around gem2
-        if (arr[row2][column2].equals (arr[row2 + 1][column2])) {
-            if (arr [row2][column2].equals (arr[row2 + 2][column2])){
-                bool = true;
-            }
-            else if (arr [row2][column2].equals (arr[row2 -1] [column2])) {
-                bool = true;
-            }
-        }
-        if (arr[row2][column2].equals (arr[row2 -2][column2])) {
-            if (arr [row2][column2].equals (arr[row2 -2][column2])){
-                bool = true;
-            }
-        }
-
-        //checks for horizontal chain around gem2
-        if (arr[row2][column2].equals (arr[row2][column2+1])) {
-            if (arr [row2][column2].equals (arr[row2][column2+2])){
-                bool = true;
-            }
-            else if (arr [row2][column2].equals (arr[row2] [column2-1])) {
-                bool = true;
-            }
-        }
-
-        if (arr[row2][column2].equals (arr[row2][column2-1])) {
-            if (arr [row2][column2].equals (arr[row2][column2-2])){
-                bool = true;
-            }
-        }
-        return bool;
-
-    }
-	
 
     //public static void swap (Gem[] [] arr) {
 	
 
     public static void main( String[] args ){
-        System.out.print( esc + "2J" + esc + ";H" ); // 2J = Clear screen; ;H = move cursor to top left corner
-        
+        //Declare a scanner and a variable to hold values
+        Scanner sc = new Scanner( System.in );
+        String s;
 
+        System.out.print( esc + "2J" + esc + ";H" ); // 2J = Clear screen; ;H = move cursor to top left corner
+        String help =   " CONTROLS \n" 
+            +           "   w e     Press w, a, s, or d and then hit enter to move your cursor.\n"  
+            +           " a s d     Press e to select the current gem. Select two gems to swap them.\n"
+            +           "           \n"
+            +           " GAMEPLAY: Swaps are only allowed if they result in a chain of 3 gems*.\n"
+            +           "           Get a chain of 3 gems in a row to destroy the chain. The gems will be replaced by new random gems.\n"
+            +           "           Moves are only counted if they result in a valid swap. You have 4 swaps before the game ends.\n"
+            +           "           \n"
+            +           " Note: Currently, only chains of 3 gems are recoginized. \n"
+            +           "       *Chains are only recognized if one of the gems swapped was the middle gem of the chain of 3.\n"
+            +           "       This is a feature... a temporary feature.\n"
+            +           "       Also a temporary feature, is the fact that the board starts off already with chains.\n"
+            +           "           \n"
+            +           " Press enter to continue.";
+        System.out.print( help );
+        sc.nextLine();
+
+        System.out.print( esc + "2J" + esc + ";H" ); 
         Gem [] [] game = newGame();
         System.out.println(arrToStr( game ) + "\n"  );
 
         int numMoves = 0;
         int numSelectedGems = 0;
 
-        //Declare a scanner and a variable to hold values
-        Scanner sc = new Scanner( System.in );
-        String s;
 
         //Initial cursor points
         int row = 0;
@@ -225,12 +144,12 @@ public class Woo{
         int[][] sGem = new int[2][2];
 
 
-        while( numMoves < 50 ){
+        while( numMoves < 3 ){
 
 
-            while( numSelectedGems < 2 ){
+            while( numSelectedGems < 4 ){
                 //Get user input
-                System.out.print( esc + "K" + "Input (w/a/s/d): " ); // K = Clear line; print prompt
+                System.out.print( esc + "K" + "Input: " ); // K = Clear line; print prompt
                 s = sc.nextLine(); //Get input
                 System.out.print( esc + "1A" ); // 1A = Move cursor back up 1 row (since sc.nextLine() moves it down one row)
 
@@ -267,16 +186,30 @@ public class Woo{
             }
             numSelectedGems = 0;
 
+
             swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
             
+            //Build an array of the positions of the gems that will be destroyed later
+            ArrayList<Integer[]> toDestroy = chainItems( game, sGem[0][0], sGem[0][1] );
+            for( Integer[] i: chainItems( game, sGem[1][0], sGem[1][1] ) ){
+                toDestroy.add( i );
+            }
+
+            if( toDestroy.size() >= 3 ){
+                numMoves++;
+                for( Integer[] i: toDestroy ){
+                    int newCol = (int)(Math.random() * 6 + 31);
+                    game[ i[0] ][ i[1] ] = new Gem( newCol );
+                }
+            } else {
+                swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );   
+            }
+
             //Update board
             System.out.print( esc + "2J" + esc + ";H" ); // 2J = Clear screen; ;H = move cursor to top left corner
             System.out.println(arrToStr( game ) + "\n"  );
-            
-            //chainItems goes into an infinite loop rn
-            //ArrayList<Integer[]> toDestroy = chainItems( game, sGem[0][0], sGem[0][1] );
-
             /* 
+            System.out.println( "=========================TESTING chainItems()======================" );
             for( Integer[] j: toDestroy ){
                 for( Integer i: j ){
                     System.out.print( i + " " );
@@ -286,6 +219,8 @@ public class Woo{
             */
 
         }
+        System.out.print( "\nGame over! Press enter to exit. " );
+        sc.nextLine();
     }
 }
 	
