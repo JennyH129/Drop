@@ -119,19 +119,6 @@ public class Woo{
 	
 
     public static void main( String[] args ){
-        Gem [][] test = new Gem [10][10];
-        populate (test);
-        test[3][4] = new Gem (32);
-        test [2][4] = new Gem (32);
-        test [5][4] = new Gem (32);
-        test [4][4] = new Gem (33);
-        System.out.println (arrToStr(test));
-        swap (test, 5, 4, 4, 4);
-        System.out.println (arrToStr(test));
-        swap (test, 8, 8, 8, 7);
-        System.out.println (arrToStr(test));
-	
-		/*
         System.out.print( esc + "2J" + esc + ";H" ); // 2J = Clear screen; ;H = move cursor to top left corner
 
         //Define 2d array for the gems and then print it
@@ -179,7 +166,7 @@ public class Woo{
             System.out.print( esc + "47m" + game[row][col] + esc + "0m" ); //Overwrite it with a background color
             
             System.out.print( esc + "u" ); //Move cursor back to prompt
-	    }*/
+	    }
     }
 }
 	
