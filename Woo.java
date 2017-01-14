@@ -119,11 +119,6 @@ public class Woo{
             +           "           Get a chain of 3 gems in a row to destroy the chain. The gems will be replaced by new random gems.\n"
             +           "           Moves are only counted if they result in a valid swap. You have 4 swaps before the game ends.\n"
             +           "           \n"
-            +           " Note: Currently, only chains of 3 gems are recoginized. \n"
-            +           "       *Chains are only recognized if one of the gems swapped was the middle gem of the chain of 3.\n"
-            +           "       This is a feature... a temporary feature.\n"
-            +           "       Also a temporary feature, is the fact that the board starts off already with chains.\n"
-            +           "           \n"
             +           " Press enter to continue.";
         System.out.print( help );
         sc.nextLine();
@@ -149,7 +144,7 @@ public class Woo{
 
             while( numSelectedGems < 2 ){
                 //Get user input
-                System.out.print( esc + "K" + "Input: " ); // K = Clear line; print prompt
+                System.out.print( esc + "K" + "Input (w/a/s/d/e): " ); // K = Clear line; print prompt
                 s = sc.nextLine(); //Get input
                 System.out.print( esc + "1A" ); // 1A = Move cursor back up 1 row (since sc.nextLine() moves it down one row)
 
