@@ -19,43 +19,43 @@ public class ChainItems{
 	}
     }
 
-    public static ArrayList<Integer[]> chainItemRight(Gem[][] arr, int row, int col){
+    public static ArrayList<Integer[]> chainItemRight(Integer[][] arr, int row, int col){
 	ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
-	Gem orig = arr[row][col];
+	Integer orig = arr[row][col];
 	for(int start = col; start < arr.length && arr[row][start].equals(orig); start++){
 	    retArr.add(new Integer[] {row,start});
 	}
 	return retArr;
     }
 
-    public static ArrayList<Integer[]> chainItemLeft(Gem[][] arr, int row, int col){
+    public static ArrayList<Integer[]> chainItemLeft(Integer[][] arr, int row, int col){
 	ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
-	Gem orig = arr[row][col];
+	Integer orig = arr[row][col];
 	for(int start = col; start > 0 && arr[row][start].equals(orig); start--){
 	    retArr.add(new Integer[] {row,start});
 	}
 	return retArr;
     }
 
-    public static ArrayList<Integer[]> chainItemDown(Gem[][] arr, int row, int col){
+    public static ArrayList<Integer[]> chainItemDown(Integer[][] arr, int row, int col){
 	ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
-	Gem orig = arr[row][col];
+	Integer orig = arr[row][col];
 	for(int start = row; start < arr.length && arr[start][col].equals(orig); start++){
 	    retArr.add(new Integer[] {start,col});
 	}
 	return retArr;
     }
     
-    public static ArrayList<Integer[]> chainItemUp(Gem[][] arr, int row, int col){
+    public static ArrayList<Integer[]> chainItemUp(Integer[][] arr, int row, int col){
 	ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
-	Gem orig = arr[row][col];
+	Integer orig = arr[row][col];
 	for(int start = row; start > 0 && arr[start][col].equals(orig); start--){
 	    retArr.add(new Integer[] {start,col});
 	}
 	return retArr;
     }
 
-    public static ArrayList<Integer[]> chainItems(Gem[][] arr, int row, int col){
+    public static ArrayList<Integer[]> chainItems(Integer[][] arr, int row, int col){
 	ArrayList<Integer[]> rChain = chainItemRight(arr, col, row);
 	ArrayList<Integer[]> lChain = chainItemLeft(arr, col, row);
 	ArrayList<Integer[]> uChain = chainItemUp(arr, col, row);
@@ -75,5 +75,21 @@ public class ChainItems{
 	}
 
 	return retArr;
+    }
+
+    public static void main(String[] args){
+	Integer[][] tester = new Integer[10][10];
+
+	populate(tester);
+	arrToStr(tester);
+
+	System.out.println();
+	
+	for(Integer[] I: chainItems(tester,4,4)){
+	    for(Integer i: I){
+		System.out.print(i);
+	    }
+	    System.out.println();
+	};
     }
 }
