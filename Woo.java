@@ -36,6 +36,21 @@ public class Woo{
         return board;
     }
 
+    public static boolean isNextTo (int row1, int col1, int row2, int col2) {
+	boolean bool = false;
+	if (row1 == row2) {
+	    if ((col1 == col2 +1) || (col1 == col2-1)) {
+		bool = true;
+	    }
+	}
+	if (col1==col2) {
+	    if ((row1 == row2+1) || (row1 == row2-1)) {
+		bool = true;
+	    }
+	}
+	return bool;
+    }
+
     public static void swap (Gem [] [] arr, int row1, int col1, int row2, int col2) {
         boolean bool = true; 
         Gem Gem1 = arr[row1][col1];
@@ -180,9 +195,12 @@ public class Woo{
                 System.out.print( esc + "u" ); //Move cursor back to prompt
             }
             numSelectedGems = 0;
-
-
-            swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
+	    if (isNextTo (sGem[0][0], sGem [0][1], sGem [1][0] , sGem [1][1])){
+		swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
+	    }
+	    else {
+		System.out.println ("Please select two gems that are next to each other");
+	    } 
             
             //Build an array of the positions of the gems that will be destroyed later
             ArrayList<Integer[]> toDestroy = chainItems( game, sGem[0][0], sGem[0][1] );
