@@ -60,7 +60,7 @@ public class Woo{
         */
     }
 
-    //Excludes current gem
+    //Helper method chainItems()
     public static ArrayList<Integer[]> chainItemsH( Gem[][] arr, int row, int col ){
         ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
         if( ( col > 0                   &&  arr[row][col].equals( arr[row][col - 1] )) && 
@@ -73,7 +73,7 @@ public class Woo{
         return retArr;
     }
 
-    //Excludes current gem
+    //Helper method chainItems()
     public static ArrayList<Integer[]> chainItemsV( Gem[][] arr, int row, int col ){
         ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
         if( ( row > 0               &&  arr[row][col].equals( arr[row - 1][col] )) && 
@@ -86,6 +86,7 @@ public class Woo{
         return retArr;
     }
 
+    //Returns an arraylist of the coordinates of the gems that are to be destroyed
     public static ArrayList<Integer[]> chainItems( Gem[][] arr, int row, int col ){
         ArrayList<Integer[]> hChain = chainItemsH( arr, row, col );
         ArrayList<Integer[]> vChain = chainItemsV( arr, row, col );
@@ -110,6 +111,7 @@ public class Woo{
         Scanner sc = new Scanner( System.in );
         String s;
 
+	//Print help info
         System.out.print( esc + "2J" + esc + ";H" ); // 2J = Clear screen; ;H = move cursor to top left corner
         String help =   " CONTROLS \n" 
             +           "   w e     Press w, a, s, or d and then hit enter to move your cursor.\n"  
@@ -121,23 +123,23 @@ public class Woo{
             +           "           \n"
             +           " Press enter to continue.";
         System.out.print( help );
+	//Press enter to continue
         sc.nextLine();
 
+	//Clear screen and initialize 2d Gem array
         System.out.print( esc + "2J" + esc + ";H" ); 
         Gem [] [] game = newGame();
         System.out.println(arrToStr( game ) + "\n"  );
 
         int numMoves = 0;
         int numSelectedGems = 0;
-
-
         //Initial cursor points
         int row = 0;
         int col = 0;
 
-        //Coords of selected gems
+        //2d array holding the coordinates of selected gems
+	//First levem elements
         int[][] sGem = new int[2][2];
-
 
         while( numMoves < 4 ){
 
@@ -155,6 +157,7 @@ public class Woo{
                 System.out.print( esc + "0m" + game[row][col] ); //Overwrite it with no background color
 
                 //This block handles input
+		//====Move cursor====
                 if( s.equals("w") && row > 0 ){
                     row--;
                 } else if( s.equals("s") && row < game.length - 1 ){
@@ -168,6 +171,8 @@ public class Woo{
                     sGem[ numSelectedGems ][1] = col; 
                     numSelectedGems++;
                 }
+		//====Move cursor====
+		//====Select 
                 else {
                     System.out.print( esc + "u" + "Input or move invalid. Press enter to continue. " );
                     sc.nextLine();
