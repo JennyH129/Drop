@@ -56,9 +56,26 @@ Jenny Han:: Wrote method swap and chainCheck
 All ::  Let user select gems to swap. Detected some chains and replaced them with new random gems. Chain detection is a WIP.
 ==============================================================
 
+2017-01-15
+--------------------------------------------------------------
+Levi Olevsky :: Created class ChainItems to hold methods for checking chains
+==============================================================
+
+2017-01-17
+--------------------------------------------------------------
+Levi Olevsky :: Changed chainItems() to work of Gems instead of with Integers
+Jenny Han :: Added method, isNextTo() to check if selected gems are next to each other. Also updated README.md
+==============================================================
+
+2017-01-18
+--------------------------------------------------------------
+Arif Roktim :: Added call to isNextTo() method in driver file.
+==============================================================
+
 yyyy-mm-dd
 --------------------------------------------------------------
 Arif Roktim :: <Thing member did.>
 Levi Olevsky :: <Thing member did.>
 Jenny Han :: <Thing member did.>
 ==============================================================
+
