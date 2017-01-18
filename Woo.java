@@ -200,27 +200,35 @@ public class Woo{
                 System.out.print( esc + "u" ); //Move cursor back to prompt
             }
             numSelectedGems = 0;
-            
-            //Build an array of the positions of the gems that will be destroyed later
-            ArrayList<Integer[]> toDestroy = chainItems( game, sGem[0][0], sGem[0][1] );
-            for( Integer[] i: chainItems( game, sGem[1][0], sGem[1][1] ) ){
-                toDestroy.add( i );
-            }
+	    if( isNextTo( sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] ) ){
+		//Build an array of the positions of the gems that will be destroyed later
+		ArrayList<Integer[]> toDestroy = chainItems( game, sGem[0][0], sGem[0][1] );
+		for( Integer[] i: chainItems( game, sGem[1][0], sGem[1][1] ) ){
+		    toDestroy.add( i );
+		}
 
-            if( toDestroy.size() >= 3 ){
-                numMoves++;
-                for( Integer[] i: toDestroy ){
-                    int newCol = (int)(Math.random() * 6 + 31);
-                    game[ i[0] ][ i[1] ] = new Gem( newCol );
-                }
-            } else {
-                swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
+		if( toDestroy.size() >= 3 ){
+		    numMoves++;
+		    for( Integer[] i: toDestroy ){
+			int newCol = (int)(Math.random() * 6 + 31);
+			game[ i[0] ][ i[1] ] = new Gem( newCol );
+		    }
+		} else {
+		    swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
+		}
+	    
+		//Update board
+		System.out.print( esc + "2J" + esc + ";H" ); // 2J = Clear screen; ;H = move cursor to top left corner
+		System.out.println(arrToStr( game ) + "\n"  );
+        	
+	    } else {
+		System.out.print( esc + "u" + "Selected gems not next to each other. Press " );
+		sc.nextLine();
+		System.out.print( esc + "1A" );
 	    }
 
-            //Update board
-            System.out.print( esc + "2J" + esc + ";H" ); // 2J = Clear screen; ;H = move cursor to top left corner
-            System.out.println(arrToStr( game ) + "\n"  );
-            /* 
+            
+	    /* 
             System.out.println( "=========================TESTING chainItems()======================" );
             for( Integer[] j: toDestroy ){
                 for( Integer i: j ){
@@ -229,6 +237,7 @@ public class Woo{
                 System.out.println( "" );
             }
             */
+	    
 
         }
         System.out.print( "\nGame over! Press enter to exit. " );
