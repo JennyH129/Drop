@@ -2,10 +2,10 @@
 
 ## Launch instructions
 To compile:
-$ javac Woo.java
+`$ javac Woo.java`
 
 To run: 
-$ java Woo
+`$ java Woo`
 
 
 ## The Game
