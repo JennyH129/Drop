@@ -195,12 +195,6 @@ public class Woo{
                 System.out.print( esc + "u" ); //Move cursor back to prompt
             }
             numSelectedGems = 0;
-	    if (isNextTo (sGem[0][0], sGem [0][1], sGem [1][0] , sGem [1][1])){
-		swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
-	    }
-	    else {
-		System.out.println ("Please select two gems that are next to each other");
-	    } 
             
             //Build an array of the positions of the gems that will be destroyed later
             ArrayList<Integer[]> toDestroy = chainItems( game, sGem[0][0], sGem[0][1] );
@@ -215,8 +209,8 @@ public class Woo{
                     game[ i[0] ][ i[1] ] = new Gem( newCol );
                 }
             } else {
-                swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );   
-            }
+                swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
+	    }
 
             //Update board
             System.out.print( esc + "2J" + esc + ";H" ); // 2J = Clear screen; ;H = move cursor to top left corner
