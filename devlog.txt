@@ -69,7 +69,7 @@ Jenny Han :: Added method, isNextTo() to check if selected gems are next to each
 
 2017-01-18
 --------------------------------------------------------------
-Arif Roktim :: Added call to isNextTo() method in driver file.
+Arif Roktim :: Added call to isNextTo() method in driver file. Implemented horizontal chain checking.
 ==============================================================
 
 yyyy-mm-dd
