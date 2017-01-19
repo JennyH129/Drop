@@ -1,8 +1,15 @@
-import java.util.Arraylist;
-public class CrossGem {
-    public ArrayList<Integer[]> special (Gem [] [] ) {
+import java.util.ArrayList;
+public class CrossGem extends SuperGem{
+    public ArrayList<Integer[]> special (Gem [] [] board, int row, int col) {
 	ArrayList<Integer []> arr = new ArrayList <Integer[]> ();
-	int row = 
-	for (int i = ; i < 10; i ++) {
+
+        for (int i = 0; i < 10; i ++) {
+	    arr.add(new Integer [] {row, i});
+	    arr.add (new Integer[] {i, col}); 
+	}
+	return arr;
+    }
+}
+	
 	    
 	

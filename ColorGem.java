@@ -2,16 +2,16 @@ import java.util.ArrayList;
 public class ColorGem extends SuperGem {
     
     
-    public abstract ArrayList <Integer[]> special (Gem[][] board, Gem selected){
+    public ArrayList <Integer[]> special (Gem[][] board, int row, int col){
 	ArrayList <Integer[]> arr = new ArrayList <Integer[]> ();
-	for ( i = 0; i < board.size () -1; i ++ ) {
-	    for (j = 0; j <board.get(i).length -1; j ++) {
-		if ((board.get(i))[j] == selected ) {
-		    arr.add (//[row, column]
-			     );
+	for ( int i = 0; i < board.length -1; i ++ ) {
+	    for (int j = 0; j <board[i].length -1; j ++) {
+		if (board[i][j].equals( board [row][col]) ) {
+		    arr.add (new Integer [] {i, j}); 			    
 		}
 	    }
 	}
+	return arr; 
     }
     
 } 
