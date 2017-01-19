@@ -47,6 +47,25 @@ public class ChainItems{
     public static void main(String[] args){
         Gem[][] board = new Gem[10][10];
         Woo.populate(board);
+        //BUG: Chains are not detected if one of the gems is in the last column
+        //This chain is not detected
+        board[5][9] = new Gem(31);
+        board[5][8] = new Gem(31);
+        board[5][7] = new Gem(31);
+        board[5][6] = new Gem(31);
+        board[5][5] = new Gem(31);
+        board[5][4] = new Gem(31);
+        board[5][3] = new Gem(31);
+        board[5][2] = new Gem(31);
+        //This chain is detected
+        board[6][9] = new Gem(32);
+        board[6][8] = new Gem(31);
+        board[6][7] = new Gem(31);
+        board[6][6] = new Gem(31);
+        board[6][5] = new Gem(31);
+        board[6][4] = new Gem(31);
+        board[6][3] = new Gem(31);
+        board[6][2] = new Gem(31);
         System.out.println( Woo.arrToStr(board) );
         ArrayList<Integer[]> chain = chainItems( board );
         for( Integer[] i: chain ){
