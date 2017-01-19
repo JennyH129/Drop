@@ -1,6 +1,6 @@
 public class Gem{
 
-    private int color;
+    protected int color;
     private boolean locked;
     
     public Gem(){
