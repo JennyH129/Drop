@@ -68,9 +68,10 @@ public class ChainItems{
         board[6][2] = new Gem(31);
         System.out.println( Woo.arrToStr(board) );
         ArrayList<Integer[]> chain = chainItems( board );
+        System.out.println( "Row\tColumn" );
         for( Integer[] i: chain ){
             for( Integer j: i ){
-                System.out.print( j + " " );
+                System.out.print( j + "\t" );
             }
             System.out.println();
         }
