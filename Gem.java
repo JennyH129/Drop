@@ -3,8 +3,22 @@ public class Gem{
     private int color;
     private boolean locked;
     
+    public Gem(){
+        color = (int)(Math.random() * 6 + 31);
+    }
+    /*
+       newColor should be in range [31,36]
+       Colors:
+        31 -- Red
+        32 -- Green
+        33 -- Yellow
+        34 -- Blue
+        35 -- Magenta
+        36 -- Cyan
+    
+     */
     public Gem(int newColor){
-	color = newColor;
+        color = newColor;
     }
 
     public String toString(){

@@ -24,7 +24,7 @@ public class Woo{
     public static void populate( Gem[][] arr ){
         for( int i = 0; i < arr.length; i++ ){
             for( int j = 0; j < arr[i].length; j++ ){
-                arr[i][j] = new Gem((int)(Math.random() * 6 + 31));
+                arr[i][j] = new Gem();
             }
         }
     }
@@ -65,7 +65,7 @@ public class Woo{
 
         if( toDestroy.size() >= 3 ){
             for( Integer[] i: toDestroy ){
-                arr[ i[0] ][ i[1] ] = new Gem((int)(Math.random() * 6 + 31));
+                arr[ i[0] ][ i[1] ] = new Gem();
             }
         } else {
             arr[row1][col1] = Gem1;
@@ -162,7 +162,7 @@ public class Woo{
                     numMoves++;
                     for( Integer[] i: toDestroy ){
                         int newCol = (int)(Math.random() * 6 + 31);
-                        game[ i[0] ][ i[1] ] = new Gem( newCol );
+                        game[ i[0] ][ i[1] ] = new Gem();
                     }
                 } else {
                     swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
