@@ -2,96 +2,59 @@ import java.util.ArrayList;
 
 public class ChainItems{
 
-    public static void arrToStr(Integer[][] arr){
-	for(Integer[] I: arr){
-	    for(Integer i: I){
-		System.out.print( i + " ");
-	    }
-	    System.out.println();
-	}
-    }
-    
-    public static void populate(Integer[][] arr){
-	for(int i = 0; i < arr.length; i++){
-	    for(int I = 0; I < arr.length; I++){
-		arr[i][I] = (int)(Math.random() * 3);
-	    }
-	}
+    //Returns a list of the positions of chains
+    public static ArrayList<Integer[]> chainItems( Gem[][] arr ){
+        ArrayList<Integer[]> chain = chainItemsRow( arr );
+        /*
+        for( Integer[] i: chainItemsColumn( arr ) ){
+            chain.add( i );
+        }
+        */
+        return chain;
     }
 
-    public static ArrayList<Integer[]> chainItemRight(Gem[][] arr, int row, int col){
-	ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
-        Gem orig = arr[row][col];
-	for(int start = col; start < arr.length && arr[row][start].equals(orig); start++){
-	    retArr.add(new Integer[] {row,start});
-	}
-	return retArr;
+    //Returns horizontal chains
+    private static ArrayList<Integer[]> chainItemsRow( Gem[][] arr ){
+        ArrayList<Integer[]> chain = new ArrayList<Integer[]>();
+
+        //Iterate through the 2d gem array checking for chains of Gems
+        //First check for chains in rows
+        for( int row = 0; row < arr.length; row++ ){
+            for( int col = 0; col < arr[row].length; col++ ){
+                int chainLen = 1; //Length of current chain
+
+                for( int i = col; i < arr[row].length; i++ ){
+                    if( i == arr[row].length - 1 ){
+                        //do nothing
+                    } else if( arr[row][i].equals( arr[row][i + 1] ) ){
+                        chainLen++;
+                    } else{
+                        if( i - col + 1 >= 3 ){ //if the chain length is greater than or equal to 3, add the chain
+                            for( int j = col; j <= i; j++ ){
+                                chain.add( new Integer[] { row, j } );
+                            }
+                        }
+                        col = i;
+                        break;
+                    }
+                }
+            }
+        }
+        return chain;
     }
 
-    public static ArrayList<Integer[]> chainItemLeft(Gem[][] arr, int row, int col){
-	ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
-	Gem orig = arr[row][col];
-	for(int start = col; start > 0 && arr[row][start].equals(orig); start--){
-	    retArr.add(new Integer[] {row,start});
-	}
-	return retArr;
+    //Main method only for testing
+    public static void main(String[] args){
+        Gem[][] board = new Gem[10][10];
+        Woo.populate(board);
+        System.out.println( Woo.arrToStr(board) );
+        ArrayList<Integer[]> chain = chainItems( board );
+        for( Integer[] i: chain ){
+            for( Integer j: i ){
+                System.out.print( j + " " );
+            }
+            System.out.println();
+        }
     }
 
-    public static ArrayList<Integer[]> chainItemDown(Gem[][] arr, int row, int col){
-	ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
-        Gem orig = arr[row][col];
-	for(int start = row; start < arr.length && arr[start][col].equals(orig); start++){
-	    retArr.add(new Integer[] {start,col});
-	}
-	return retArr;
-    }
-    
-    public static ArrayList<Integer[]> chainItemUp(Gem[][] arr, int row, int col){
-	ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
-        Gem orig = arr[row][col];
-	for(int start = row; start > 0 && arr[start][col].equals(orig); start--){
-	    retArr.add(new Integer[] {start,col});
-	}
-	return retArr;
-    }
-
-    public static ArrayList<Integer[]> chainItems(Gem[][] arr, int row, int col){
-	ArrayList<Integer[]> rChain = chainItemRight(arr, col, row);
-	ArrayList<Integer[]> lChain = chainItemLeft(arr, col, row);
-	ArrayList<Integer[]> uChain = chainItemUp(arr, col, row);
-	ArrayList<Integer[]> dChain = chainItemDown(arr, col, row);
-	ArrayList<Integer[]> retArr = new ArrayList<Integer[]>();
-	if(rChain.size() >=3){
-	    for(Integer[] i: rChain){ retArr.add(i);}
-	}
-	if(lChain.size() >=3){
-	    for(Integer[] i: lChain){ retArr.add(i);}
-	}
-	if(uChain.size() >=3){
-	    for(Integer[] i: uChain){ retArr.add(i);}
-	}
-	if(dChain.size() >=3){
-	    for(Integer[] i: dChain){ retArr.add(i);}
-	}
-
-	return retArr;
-    }
-
-    /*
-      public static void main(String[] args){
-      Integer[][] tester = new Integer[10][10];
-      
-      populate(tester);
-      arrToStr(tester);
-      
-      System.out.println();
-      
-      for(Integer[] I: chainItems(tester,4,4)){
-      for(Integer i: I){
-      System.out.print(i);
-      }
-      System.out.println();
-      };
-      }
-    */
 }
