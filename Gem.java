@@ -1,7 +1,7 @@
 public class Gem{
 
     protected int color;
-    private boolean locked;
+    protected boolean locked;
     
     public Gem(){
         color = (int)(Math.random() * 6 + 31);
@@ -22,7 +22,7 @@ public class Gem{
     }
 
     public String toString(){
-        return Woo.esc + color + "m*" + Woo.esc + "0m";
+        return Woo.esc + color + "m#" + Woo.esc + "0m";
     }
     
     public boolean equals(Gem other){

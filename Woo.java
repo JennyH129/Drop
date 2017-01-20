@@ -108,23 +108,6 @@ public class Woo{
         //Clear screen and initialize 2d Gem array
         System.out.print( esc + "2J" + esc + ";H" ); 
         Gem [] [] game = newGame();
-        game[5][9] = new Gem(31);
-        game[5][8] = new Gem(31);
-        game[5][7] = new Gem(31);
-        game[5][6] = new Gem(31);
-        game[5][5] = new Gem(31);
-        game[5][4] = new Gem(31);
-        game[5][3] = new Gem(31);
-        game[5][2] = new Gem(31);
-        //This chain is detected
-        game[6][9] = new Gem(32);
-        game[6][8] = new Gem(31);
-        game[6][7] = new Gem(31);
-        game[6][6] = new Gem(31);
-        game[6][5] = new Gem(31);
-        game[6][4] = new Gem(31);
-        game[6][3] = new Gem(31);
-        game[6][2] = new Gem(31);
         System.out.println(arrToStr( game ) + "\n"  );
 
         int numMoves = 0;
