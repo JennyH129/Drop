@@ -15,7 +15,7 @@ Chain detection finally done.
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The board starts off with chains already in it.
+Detect if there aren't any moves possible.
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -73,7 +73,7 @@ Arif Roktim :: Added call to isNextTo() method in driver file. Implemented horiz
 
 2017-01-19
 --------------------------------------------------------------
-Arif Roktim :: Fixed bug in horizontal chain checking.
+Arif Roktim :: Fixed bug in horizontal chain checking. Completed chain checking by adding vertical chain checking. Made sure game board doesn't start with chains in it already. Made SuperGems destroy appropriate gems when used.
 Jenny Han :: Implemented class SuperGem and its subclasses. Added super gems to the game board.
 ==============================================================
 
