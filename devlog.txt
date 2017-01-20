@@ -11,11 +11,10 @@ Bejeweled
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Managed to somewhat achieve MVP in time.
+Chain detection finally done.
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Only chains of 3 gems are recoginized. 
-Chains are only recognized if one of the gems swapped was the middle gem of the chain of 3.
 The board starts off with chains already in it.
 
 COOL STUFF LEARNED

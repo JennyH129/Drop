@@ -22,6 +22,7 @@ public class Woo{
     }
 
     public static void populate( Gem[][] arr ){
+        //Initial population
         int gemType = 0; 
         for( int i = 0; i < arr.length; i++ ){
             for( int j = 0; j < arr[i].length; j++ ){
@@ -37,6 +38,10 @@ public class Woo{
                 }
             }
         }
+        while( destroyChain(arr) ){
+            //This will remove chains that the game starts with
+        }
+
     }
 
     public static Gem [] [] newGame () {
@@ -47,18 +52,18 @@ public class Woo{
     }
 
     public static boolean isNextTo (int row1, int col1, int row2, int col2) {
-	boolean bool = false;
-	if (row1 == row2) {
-	    if ((col1 == col2 +1) || (col1 == col2-1)) {
-		bool = true;
-	    }
-	}
-	if (col1==col2) {
-	    if ((row1 == row2+1) || (row1 == row2-1)) {
-		bool = true;
-	    }
-	}
-	return bool;
+        boolean bool = false;
+        if (row1 == row2) {
+            if ((col1 == col2 +1) || (col1 == col2-1)) {
+                bool = true;
+            }
+        }
+        if (col1==col2) {
+            if ((row1 == row2+1) || (row1 == row2-1)) {
+                bool = true;
+            }
+        }
+        return bool;
     }
 
     public static void swap (Gem [] [] arr, int row1, int col1, int row2, int col2) {
@@ -69,20 +74,24 @@ public class Woo{
         arr[row2][col2] = Gem1;
     }
 
-    public static void destroyChain(){
-        /*
-        ArrayList<Integer[]> toDestroy = chainItems( arr, row1, col1 );
+    /* destroyChain( Gem[][] game ) -- destroys the chains in a given board
+     * Precond: game is not null
+     *
+     * Post: If chains found: destroy the chains by replacing them with new random gems. Then return true.
+     *       Else: return false.
+     */
+    public static boolean destroyChain( Gem[][] game ){
+        //Build an array of the positions of the gems that will be destroyed later
+        ArrayList<Integer[]> toDestroy = ChainItems.chainItems( game );
 
         if( toDestroy.size() >= 3 ){
             for( Integer[] i: toDestroy ){
-                arr[ i[0] ][ i[1] ] = new Gem();
+                int newCol = (int)(Math.random() * 6 + 31);
+                game[ i[0] ][ i[1] ] = new Gem();
             }
-        } else {
-            arr[row1][col1] = Gem1;
-            arr[row2][col2] = Gem2;
-            bool = false;
+            return true;
         }
-        */
+        return false;
     }
 
     public static void main( String[] args ){
@@ -165,17 +174,10 @@ public class Woo{
             if( isNextTo( sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] ) ){
                 swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
 
-                //Build an array of the positions of the gems that will be destroyed later
-                ArrayList<Integer[]> toDestroy = ChainItems.chainItems( game );
-
-                if( toDestroy.size() >= 3 ){
+                if( destroyChain(game) ){
                     numMoves++;
-                    for( Integer[] i: toDestroy ){
-                        int newCol = (int)(Math.random() * 6 + 31);
-                        game[ i[0] ][ i[1] ] = new Gem();
-                    }
                 } else {
-                    swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
+                    swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );   
                 }
 
                 //Update board
