@@ -2,6 +2,20 @@ import java.util.ArrayList;
 
 public class ChainItems{
 
+    /* public static ArrayList<Integer[]> rmDupe(Gem[][] arr){
+	ArrayList<Integer[]> noDupes = new ArrayList<Integer[]>();
+	
+	for(int i = 0; i < arr.length; i++){
+	    for(int I = 0; I <noDupes.size(); I++){
+		if (not (arr[i].equals(noDupes.get(I)))){
+		    noDupes.add(arr[i]);
+		}
+	    }
+	}
+	
+	return noDupes;
+    }
+    */
     //Returns a list of the positions of chains
     public static ArrayList<Integer[]> chainItems( Gem[][] arr ){
         ArrayList<Integer[]> chain = chainItemsRow( arr );
@@ -14,7 +28,7 @@ public class ChainItems{
     //Returns horizontal chains
     private static ArrayList<Integer[]> chainItemsRow( Gem[][] arr ){
         ArrayList<Integer[]> chain = new ArrayList<Integer[]>();
-
+	
         //Iterate through each row looking for chains
         for( int row = 0; row < arr.length; row++ ){
             for( int col = 0; col < arr[row].length; col++ ){
