@@ -74,13 +74,13 @@ Arif Roktim :: Added call to isNextTo() method in driver file. Implemented horiz
 2017-01-19
 --------------------------------------------------------------
 Arif Roktim :: Fixed bug in horizontal chain checking. Completed chain checking by adding vertical chain checking. Made sure game board doesn't start with chains in it already. Made SuperGems destroy appropriate gems when used.
-Jenny Han :: Implemented class SuperGem and its subclasses. Added super gems to the game board.
+Jenny Han :: Implemented class SuperGem and its subclasses. Added special gems to the game board.
 ==============================================================
 
-yyyy-mm-dd
+2017-01-20
 --------------------------------------------------------------
 Arif Roktim :: <Thing member did.>
 Levi Olevsky :: <Thing member did.>
-Jenny Han :: <Thing member did.>
+Jenny Han :: Added subclass of SuperGem called ExplodeGem and added point system
 ==============================================================
 
