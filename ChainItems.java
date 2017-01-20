@@ -27,6 +27,13 @@ public class ChainItems{
                         if( chainLen >= 3 ){ //if the chain length is greater than or equal to 3, add the chain
                             for( int j = col; j <= i; j++ ){
                                 chain.add( new Integer[] { row, j } );
+                                //If the added gem is a superGem, also add the gems the supergem would destroy.
+                                if( arr[row][j] instanceof SuperGem ){
+                                    //Typecast to SuperGem to access method special()
+                                    for( Integer[] k: ( (SuperGem)arr[row][j] ).special( arr, row, j ) ){
+                                        chain.add( k );
+                                    }
+                                }
                             }
                         }
                         col = i;
@@ -54,6 +61,11 @@ public class ChainItems{
                         if( chainLen >= 3 ){
                             for( int j = row; j <= i; j++ ){
                                 chain.add( new Integer[] { j, col } );
+                                if( arr[j][col] instanceof SuperGem ){
+                                    for( Integer[] k: ( (SuperGem)arr[j][col] ).special( arr, j, col ) ){
+                                        chain.add( k );
+                                    }
+                                }
                             }
                         }
                         row = i;

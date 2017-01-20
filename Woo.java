@@ -176,6 +176,9 @@ public class Woo{
 
                 if( destroyChain(game) ){
                     numMoves++;
+                    while( destroyChain(game) ){
+                        //remove the new chains that are formed by old chains being replaced
+                    }
                 } else {
                     swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );   
                 }
