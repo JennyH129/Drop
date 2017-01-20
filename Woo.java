@@ -22,9 +22,19 @@ public class Woo{
     }
 
     public static void populate( Gem[][] arr ){
+	int gemType = 0; 
         for( int i = 0; i < arr.length; i++ ){
             for( int j = 0; j < arr[i].length; j++ ){
-                arr[i][j] = new Gem();
+		gemType = (int) (Math.random() * 10);
+		if (gemType == 1) {
+		    arr[i][j] = new CrossGem();
+		}
+		if (gemType == 2) {
+		    arr [i][j] = new ColorGem();
+		}
+		else {
+		    arr[i][j] = new Gem();
+		}
             }
         }
     }
