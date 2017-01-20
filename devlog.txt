@@ -72,6 +72,12 @@ Jenny Han :: Added method, isNextTo() to check if selected gems are next to each
 Arif Roktim :: Added call to isNextTo() method in driver file. Implemented horizontal chain checking.
 ==============================================================
 
+2017-01-19
+--------------------------------------------------------------
+Arif Roktim :: Fixed bug in horizontal chain checking.
+Jenny Han :: Implemented class SuperGem and its subclasses. Added super gems to the game board.
+==============================================================
+
 yyyy-mm-dd
 --------------------------------------------------------------
 Arif Roktim :: <Thing member did.>
