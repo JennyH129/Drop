@@ -10,9 +10,11 @@ public class CrossGem extends SuperGem{
 	return arr;
     }
 
+
     public String toString () {
 	return Woo.esc + color + "m+" + Woo.esc + "0m";
     } 
+
 }
 	
 	    

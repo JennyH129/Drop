@@ -24,9 +24,7 @@ public class ChainItems{
                 int chainLen = 1; //Length of current chain
 
                 for( int i = col; i < arr[row].length; i++ ){
-                    if( i == arr[row].length - 1 ){
-                        //do nothing
-                    } else if( arr[row][i].equals( arr[row][i + 1] ) ){
+                    if( (i < arr[row].length - 1 ) && arr[row][i].equals( arr[row][i + 1] ) ){
                         chainLen++;
                     } else{
                         if( i - col + 1 >= 3 ){ //if the chain length is greater than or equal to 3, add the chain

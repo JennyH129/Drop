@@ -12,10 +12,12 @@ public class ColorGem extends SuperGem {
 	    }
 	}
 	return arr; 
+
     }
 
     public String toString () {
 	return Woo.esc + color + "mx" + Woo.esc + "0m";
+
     }
     
 } 
