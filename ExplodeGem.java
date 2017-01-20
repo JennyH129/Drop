@@ -2,6 +2,7 @@ import java.util.ArrayList;
 public class ExplodeGem extends SuperGem {
     public ArrayList <Integer[]> special (Gem [][] board, int row, int col) {
 	ArrayList <Integer []> arr = new ArrayList <Integer[]> ();
+	//If the special gem is in a corner of the board, add the three gems around it and the gem itself
 	if (row == 0 && col == 0) {
 	    for (int i = 0; i < 2; i ++) {
 		for (int j = 0; j < 2; j ++) {
@@ -30,7 +31,8 @@ public class ExplodeGem extends SuperGem {
 		}
 	    }
 	}
-
+	
+	//If the special gem is on the side of the board, add the 5 gems around it and the gem itself
 	else if (row == 0) {
 	    for (int i = 0; i < 2; i ++ ) {
 		for (int j = -1; j < 2; j ++)  {
@@ -63,7 +65,7 @@ public class ExplodeGem extends SuperGem {
 	    }
 	}
 	
-		    
+	//If the special gem is in the middle of the board, add the 8 gems around it and the gem itself
 
 	else {
 	    for (int i = -1; i < 2; i ++) { 
@@ -72,7 +74,13 @@ public class ExplodeGem extends SuperGem {
 		}
 	    }
 	}
+	System.out.println (arr); 
 	return arr; 
     }
+
+    public String toString () {
+	return Woo.esc + color + "mo" + Woo.esc + "0m";
+    }
+    
 }
 	    

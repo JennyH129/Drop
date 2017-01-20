@@ -4,7 +4,9 @@ public class CrossGem extends SuperGem{
 	ArrayList<Integer []> arr = new ArrayList <Integer[]> ();
 
         for (int i = 0; i < 10; i ++) {
+	    //adds all the gems in the same row as the special gem 
 	    arr.add(new Integer [] {row, i});
+	    //adds all the gems in the same column as the special gem
 	    arr.add (new Integer[] {i, col}); 
 	}
 	return arr;

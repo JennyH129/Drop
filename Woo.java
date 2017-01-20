@@ -26,13 +26,16 @@ public class Woo{
         int gemType = 0; 
         for( int i = 0; i < arr.length; i++ ){
             for( int j = 0; j < arr[i].length; j++ ){
-                gemType = (int) (Math.random() * 10);
+                gemType = (int) (Math.random() * 20);
                 if (gemType == 1) {
                     arr[i][j] = new CrossGem();
                 }
                 else if (gemType == 2) {
                     arr [i][j] = new ColorGem();
                 }
+		else if (gemType == 3) {
+		    arr [i][j] = new ExplodeGem ();
+		} 
                 else {
                     arr[i][j] = new Gem();
                 }
