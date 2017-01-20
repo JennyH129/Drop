@@ -124,6 +124,7 @@ public class Woo{
         //Initial cursor points
         int row = 0;
         int col = 0;
+	int points = 0;
 
         //2d array holding the coordinates of selected gems
         //First levem elements
@@ -173,8 +174,10 @@ public class Woo{
 
             if( isNextTo( sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] ) ){
                 swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
+		points += ChainItems.chainItems( game ).size();
 
                 if( destroyChain(game) ){
+		    
                     numMoves++;
                     while( destroyChain(game) ){
                         //remove the new chains that are formed by old chains being replaced
@@ -186,7 +189,8 @@ public class Woo{
                 //Update board
                 System.out.print( esc + "2J" + esc + ";H" ); // 2J = Clear screen; ;H = move cursor to top left corner
                 System.out.println(arrToStr( game ) + "\n"  );
-
+		System.out.println( "Points: " + points );
+		
             } else {
                 System.out.print( esc + "u" + "Selected gems not next to each other. Press enter to continue." );
                 sc.nextLine();
