@@ -79,12 +79,19 @@ Jenny Han :: Implemented class SuperGem and its subclasses. Added special gems t
 
 2017-01-20
 --------------------------------------------------------------
-Arif Roktim :: <Thing member did.>
-Levi Olevsky :: <Thing member did.>
+Arif Roktim :: Refactored code related to screen manipulation. Methods for the screen are in Screen.java. Woo.java now prints moves left.
+Levi Olevsky :: Started noDupe() method
 Jenny Han :: Added subclass of SuperGem called ExplodeGem and added point system
 ==============================================================
 
-2017-01-20
+2017-01-21
+--------------------------------------------------------------
+Arif Roktim :: Selected gems now stay highlighted. Player can now deselect gems by selecting them again.
+Levi Olevsky :: <Thing member did.>
+Jenny Han :: <Thing member did.>
+==============================================================
+
+yyyy-mm-dd
 --------------------------------------------------------------
 Arif Roktim :: <Thing member did.>
 Levi Olevsky :: <Thing member did.>
