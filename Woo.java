@@ -33,9 +33,9 @@ public class Woo{
                 else if (gemType == 2) {
                     arr [i][j] = new ColorGem();
                 }
-		else if (gemType == 3) {
-		    arr [i][j] = new ExplodeGem ();
-		} 
+                else if (gemType == 3) {
+                    arr [i][j] = new ExplodeGem ();
+                } 
                 else {
                     arr[i][j] = new Gem();
                 }
@@ -48,7 +48,6 @@ public class Woo{
     }
 
     public static Gem [] [] newGame () {
-
         Gem [] [] board = new Gem [10] [10];
         populate (board);
         return board;
@@ -89,7 +88,6 @@ public class Woo{
 
         if( toDestroy.size() >= 3 ){
             for( Integer[] i: toDestroy ){
-                int newCol = (int)(Math.random() * 6 + 31);
                 game[ i[0] ][ i[1] ] = new Gem();
             }
             return true;
@@ -97,13 +95,8 @@ public class Woo{
         return false;
     }
 
-    public static void main( String[] args ){
-        //Declare a scanner and a variable to hold values
-        Scanner sc = new Scanner( System.in );
-        String s;
-
-        //Print help info
-        System.out.print( esc + "2J" + esc + ";H" ); // 2J = Clear screen; ;H = move cursor to top left corner
+    public static void printHelp(){
+        Screen.clear();
         String help =   " CONTROLS \n" 
             +           "   w e     Press w, a, s, or d and then hit enter to move your cursor.\n"  
             +           " a s d     Press e to select the current gem. Select two gems to swap them.\n"
@@ -114,23 +107,40 @@ public class Woo{
             +           "           \n"
             +           " Press enter to continue.";
         System.out.print( help );
-        //Press enter to continue
-        sc.nextLine();
+    }
 
-        //Clear screen and initialize 2d Gem array
-        System.out.print( esc + "2J" + esc + ";H" ); 
-        Gem [] [] game = newGame();
-        System.out.println(arrToStr( game ) + "\n"  );
+    public static void main( String[] args ){
+        //Declare a scanner and a variable to hold values
+        Scanner sc = new Scanner( System.in );
+        String s;
 
         int numMoves = 0;
         int numSelectedGems = 0;
+        int points = 0;
         //Initial cursor points
         int row = 0;
         int col = 0;
-	int points = 0;
 
-        //2d array holding the coordinates of selected gems
-        //First levem elements
+        printHelp();
+        //Press enter to continue
+        Screen.promptUser( sc );
+
+        //Clear screen and initialize 2d Gem array
+        Screen.clear();
+        Gem [] [] game = newGame();
+        System.out.print(arrToStr( game ) + "\n\n"  );
+        System.out.println( "Moves left: " + (10 - numMoves) );
+        System.out.println( "Points: " + points );
+
+
+        /* sGem is a 2d array holding the coordinates of selected gems
+           Each first level element represents the coordinates of a single gem. The 0th item is the row, the 1st item is the column.
+           Example:
+           [ 
+            Gem 0: [ row, col ]
+            Gem 1: [ row, col ]
+           ]
+        */
         int[][] sGem = new int[2][2];
 
         while( numMoves < 10 ){
@@ -138,15 +148,13 @@ public class Woo{
 
             while( numSelectedGems < 2 ){
                 //Get user input
-                System.out.print( esc + "K" + "Input (w/a/s/d/e): " ); // K = Clear line; print prompt
-                s = sc.nextLine(); //Get input
-                System.out.print( esc + "1A" ); // 1A = Move cursor back up 1 row (since sc.nextLine() moves it down one row)
+                s = Screen.promptUser( "Input (w/a/s/d/e): ", sc );
 
                 //Update screen
-                System.out.print( esc + "s" ); // s = Save position of prompt for later
-                //Todo: make a method that overwrites the gem at the current or given position. Should replace the next two lines
-                System.out.print( esc + ( row + 1 ) + ";" + ( 2 * col + 1 ) + "H" ); // line|col|H = Move to position of current gem object
-                System.out.print( esc + "0m" + game[row][col] ); //Overwrite it with no background color
+                Screen.save(); //save prompt location for later
+                Screen.moveToGem( row, col ); 
+                Screen.resetColor();
+                System.out.print( game[row][col] ); //Overwrite gem with no background color
 
                 //This block handles input
                 if( s.equals("w") && row > 0 ){
@@ -163,21 +171,25 @@ public class Woo{
                     numSelectedGems++;
                 }
                 else {
-                    System.out.print( esc + "u" + "Input or move invalid. Press enter to continue. " );
-                    sc.nextLine();
-                    System.out.print( esc + "1A" ); 
+                    Screen.load(); //load prompt location saved earlier
+                    System.out.print( "Input or move invalid. Press enter to continue. " );
+                    Screen.promptUser( sc );
                 }
 
-                System.out.print( esc + ( row + 1 ) + ";" + ( 2 * col + 1 ) + "H" ); //Move to position of current gem object
-                System.out.print( esc + "47m" + game[row][col] + esc + "0m" ); //Overwrite it with a background color
-
-                System.out.print( esc + "u" ); //Move cursor back to prompt
+                //Print gem as highlighted
+                Screen.moveToGem( row, col );
+                Screen.setColor( 47 );
+                System.out.print( game[row][col] );
+                Screen.resetColor();
+                Screen.load();
             }
+
             numSelectedGems = 0;
 
             if( isNextTo( sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] ) ){
+
                 swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
-		points += ChainItems.chainItems( game ).size();
+                points += ChainItems.chainItems( game ).size();
 
                 if( destroyChain(game) ){
 		    
@@ -190,20 +202,20 @@ public class Woo{
                 }
 
                 //Update board
-                System.out.print( esc + "2J" + esc + ";H" ); // 2J = Clear screen; ;H = move cursor to top left corner
-                System.out.println(arrToStr( game ) + "\n"  );
-		System.out.println( "Points: " + points );
-		
+                Screen.clear();
+                System.out.print(arrToStr( game ) + "\n\n"  );
+                System.out.println( "Moves left: " + (10 - numMoves) );
+                System.out.println( "Points: " + points );
             } else {
-                System.out.print( esc + "u" + "Selected gems not next to each other. Press enter to continue." );
-                sc.nextLine();
-                System.out.print( esc + "1A" );
+                Screen.load();
+                System.out.print( "Selected gems not next to each other. Press enter to continue." );
+                Screen.promptUser( sc );
             }
 
 
         }
         System.out.print( "\nGame over! Press enter to exit. " );
-        sc.nextLine();
+        Screen.promptUser( sc );
     }
 }
 	
