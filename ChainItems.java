@@ -22,6 +22,17 @@ public class ChainItems{
         for( Integer[] i: chainItemsColumn( arr ) ){
             chain.add( i );
         }
+        //If a gem is a superGem, also add the gems that the supergem would destroy.
+        int size = chain.size();
+        for( int i = 0; i < size; i++ ){
+            Integer[] gem = chain.get(i);
+            if( arr[ gem[0] ][ gem[1] ] instanceof SuperGem ){
+                ArrayList<Integer[]> specialChain = ( (SuperGem)arr[ gem[0] ][ gem[1] ] ).special( arr, gem[0], gem[1] );
+                for( Integer[] j: specialChain ){
+                    chain.add( j );
+                }
+            }
+        }
         return chain;
     }
 
@@ -41,13 +52,6 @@ public class ChainItems{
                         if( chainLen >= 3 ){ //if the chain length is greater than or equal to 3, add the chain
                             for( int j = col; j <= i; j++ ){
                                 chain.add( new Integer[] { row, j } );
-                                //If the added gem is a superGem, also add the gems the supergem would destroy.
-                                if( arr[row][j] instanceof SuperGem ){
-                                    //Typecast to SuperGem to access method special()
-                                    for( Integer[] k: ( (SuperGem)arr[row][j] ).special( arr, row, j ) ){
-                                        chain.add( k );
-                                    }
-                                }
                             }
                         }
                         col = i;
@@ -75,11 +79,6 @@ public class ChainItems{
                         if( chainLen >= 3 ){
                             for( int j = row; j <= i; j++ ){
                                 chain.add( new Integer[] { j, col } );
-                                if( arr[j][col] instanceof SuperGem ){
-                                    for( Integer[] k: ( (SuperGem)arr[j][col] ).special( arr, j, col ) ){
-                                        chain.add( k );
-                                    }
-                                }
                             }
                         }
                         row = i;
