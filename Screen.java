@@ -78,7 +78,12 @@ public class Screen{
         return promptUser( sc );
     }
 
-    public static void update(){
+    //Updates the gem at a given position
+    public static void updateGem( Gem[][] game, int row, int col ){
+        Screen.save();
+        moveToGem( row, col );
+        System.out.print( game[row][col] );
+        Screen.load();
     }
 
 }

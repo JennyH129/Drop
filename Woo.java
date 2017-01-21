@@ -136,6 +136,10 @@ public class Woo{
         */
         int[][] sGem = new int[2][2];
 
+        //Highlight starting point
+        game[row][col].highlight( true );
+        Screen.updateGem( game, row, col );
+
         while( numMoves < 10 ){
 
 
@@ -143,11 +147,8 @@ public class Woo{
                 //Get user input
                 s = Screen.promptUser( "Input (w/a/s/d/e): ", sc );
 
-                //Update screen
-                Screen.save(); //save prompt location for later
-                Screen.moveToGem( row, col ); 
-                Screen.resetColor();
-                System.out.print( game[row][col] ); //Overwrite gem with no background color
+                game[row][col].highlight( false );
+                Screen.updateGem( game, row, col );
 
                 //This block handles input
                 if( s.equals("w") && row > 0 ){
@@ -159,25 +160,35 @@ public class Woo{
                 } else if( s.equals("d") && col < game[row].length - 1 ){
                     col++;
                 } else if( s.equals("e") ){
-                    sGem[ numSelectedGems ][0] = row;
-                    sGem[ numSelectedGems ][1] = col; 
-                    numSelectedGems++;
+                    if( numSelectedGems == 1 && sGem[0][0] == row && sGem[0][1] == col ){ //If you select the same gem again, deselect it
+                        numSelectedGems--;
+                        game[ sGem[0][0] ][ sGem[0][1] ].select( false );
+                    } else {
+                        sGem[ numSelectedGems ][0] = row;
+                        sGem[ numSelectedGems ][1] = col; 
+                        numSelectedGems++;
+                        //force the gem to stay highlighted
+                        game[row][col].select( true ); 
+                    }
                 }
                 else {
-                    Screen.load(); //load prompt location saved earlier
+                    Screen.load(); 
                     System.out.print( "Input or move invalid. Press enter to continue. " );
                     Screen.promptUser( sc );
                 }
-
-                //Print gem as highlighted
-                Screen.moveToGem( row, col );
-                Screen.setColor( 47 );
-                System.out.print( game[row][col] );
-                Screen.resetColor();
-                Screen.load();
+                
+                if( !(s.equals("e")) ){
+                    game[row][col].highlight( true );
+                }
+                Screen.updateGem( game, row, col );
             }
 
             numSelectedGems = 0;
+            //Deselect and unhighlight selected gems
+            game[ sGem[0][0] ][ sGem[0][1] ].turnOff();
+            game[ sGem[1][0] ][ sGem[1][1] ].turnOff();
+            Screen.updateGem( game, sGem[0][0], sGem[0][1] );
+            Screen.updateGem( game, sGem[1][0], sGem[1][1] );
 
             if( isNextTo( sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] ) ){
 
@@ -199,6 +210,9 @@ public class Woo{
                 System.out.print(arrToStr( game ) + "\n\n"  );
                 System.out.println( "Moves left: " + (10 - numMoves) );
                 System.out.println( "Points: " + points );
+
+                game[row][col].highlight( true );
+                Screen.updateGem( game, row, col );
             } else {
                 Screen.load();
                 System.out.print( "Selected gems not next to each other. Press enter to continue." );
