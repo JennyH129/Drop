@@ -78,7 +78,7 @@ public class ExplodeGem extends SuperGem {
     }
 
     public String toString () {
-        return Woo.esc + color + "mo" + Woo.esc + "0m";
+        return Screen.ESC + color + "mo" + Screen.ESC + "0m";
     }
     
 }

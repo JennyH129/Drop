@@ -17,7 +17,7 @@ public class ColorGem extends SuperGem {
     }
 
     public String toString () {
-	return Woo.esc + color + "mx" + Woo.esc + "0m";
+	return Screen.ESC + color + "mx" + Screen.ESC + "0m";
 
     }
     

@@ -2,14 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 public class Woo{
 
-    /*
-      This stores the ANSI "Escape" character and the left bracket for use later
-      Info on what you can do with it and how to use it below:
-      http://ascii-table.com/ansi-escape-sequences.php
-    */
-    public static final String esc = (char)27 + "[";
-
-
+    //Returns string version of the game board
     public static String arrToStr( Gem[][] arr ){
         String retStr = "";
         for( Gem[] row: arr ){
@@ -21,6 +14,7 @@ public class Woo{
         return retStr;
     }
 
+    //Populates the game board and make sures it doesn't start with chains
     public static void populate( Gem[][] arr ){
         //Initial population
         int gemType = 0; 
@@ -69,7 +63,6 @@ public class Woo{
     }
 
     public static void swap (Gem [] [] arr, int row1, int col1, int row2, int col2) {
-        boolean bool = true; 
         Gem Gem1 = arr[row1][col1];
         Gem Gem2 = arr[row2][col2];
         arr[row1][col1] = Gem2;

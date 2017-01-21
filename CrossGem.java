@@ -14,7 +14,7 @@ public class CrossGem extends SuperGem{
 
 
     public String toString () {
-	return Woo.esc + color + "m+" + Woo.esc + "0m";
+	return Screen.ESC + color + "m+" + Screen.ESC + "0m";
     } 
 
 }
