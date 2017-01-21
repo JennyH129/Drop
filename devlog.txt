@@ -84,3 +84,10 @@ Levi Olevsky :: <Thing member did.>
 Jenny Han :: Added subclass of SuperGem called ExplodeGem and added point system
 ==============================================================
 
+2017-01-20
+--------------------------------------------------------------
+Arif Roktim :: <Thing member did.>
+Levi Olevsky :: <Thing member did.>
+Jenny Han :: <Thing member did.>
+==============================================================
+
