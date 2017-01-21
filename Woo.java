@@ -123,6 +123,7 @@ public class Woo{
         Scanner sc = new Scanner( System.in );
         String s;
 
+        //Initial values
         int numMoves = 0;
         int numSelectedGems = 0;
         int points = 0;
@@ -131,16 +132,12 @@ public class Woo{
         int col = 0;
 
         printHelp();
-        //Press enter to continue
-        Screen.promptUser( sc );
+        Screen.promptUser( sc ); //Press enter to continue
 
-        //Clear screen and initialize 2d Gem array
+        //Clear screen, initialize 2d Gem array, and print board
         Screen.clear();
         Gem [] [] game = newGame();
-        System.out.print(arrToStr( game ) + "\n\n"  );
-        System.out.println( "Moves left: " + (10 - numMoves) );
-        System.out.println( "Points: " + points );
-
+        Screen.updateBoard( game, numMoves, points );
 
         /* sGem is a 2d array holding the coordinates of selected gems
            Each first level element represents the coordinates of a single gem. The 0th item is the row, the 1st item is the column.
@@ -158,11 +155,11 @@ public class Woo{
 
         while( numMoves < 10 ){
 
-
             while( numSelectedGems < 2 ){
                 //Get user input
                 s = Screen.promptUser( "Input (w/a/s/d/e): ", sc );
 
+                //Unhighlight the gem the cursor used to be on
                 game[row][col].highlight( false );
                 Screen.updateGem( game, row, col );
 
@@ -176,73 +173,82 @@ public class Woo{
                 } else if( s.equals("d") && col < game[row].length - 1 ){
                     col++;
                 } else if( s.equals("e") ){
-                    if( numSelectedGems == 1 && sGem[0][0] == row && sGem[0][1] == col ){ //If you select the same gem again, deselect it
+                    //If you select the same gem again, deselect it
+                    if( numSelectedGems == 1 && sGem[0][0] == row && sGem[0][1] == col ){ 
                         numSelectedGems--;
                         game[ sGem[0][0] ][ sGem[0][1] ].select( false );
-                    } else {
+                    } else { //Else add the selected gem and select it
                         sGem[ numSelectedGems ][0] = row;
                         sGem[ numSelectedGems ][1] = col; 
                         numSelectedGems++;
-                        //force the gem to stay highlighted
-                        game[row][col].select( true ); 
+                        game[row][col].select( true ); //force the gem to stay highlighted
                     }
-                }
-                else {
+                } else { //Invalid input so print error message
                     Screen.load(); 
                     System.out.print( "Input or move invalid. Press enter to continue. " );
                     Screen.promptUser( sc );
                 }
                 
-                if( !(s.equals("e")) ){
-                    game[row][col].highlight( true );
-                }
+                //Highlight the gem the cursor is over
+                game[row][col].highlight( true );
+                //Update gem
                 Screen.updateGem( game, row, col );
             }
 
             numSelectedGems = 0;
-            //Deselect and unhighlight selected gems
+            //Deselect and unhighlight the selected gems
             game[ sGem[0][0] ][ sGem[0][1] ].turnOff();
-            game[ sGem[1][0] ][ sGem[1][1] ].turnOff();
             Screen.updateGem( game, sGem[0][0], sGem[0][1] );
+            game[ sGem[1][0] ][ sGem[1][1] ].turnOff();
             Screen.updateGem( game, sGem[1][0], sGem[1][1] );
 
             if( isNextTo( sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] ) ){
 
                 swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
+                //Array holding the coordinates of gems to be destroyed
                 ArrayList<Integer[]> toDestroy = ChainItems.chainItems( game );
+                //Add 1 point for each gem to be destroyed
                 points += toDestroy.size();
 
-                //public static void highlight( Gem[][] game, ArrayList<Integer[]> chain, boolean state ){
+                //If chain formed
                 if( toDestroy.size() >= 3 ){
                     //Highlight the gems that will be destroyed
                     Gem.highlight( game, toDestroy, true );
                     Screen.updateBoard( game, numMoves, points );
-                    wait( 1000 ); //wait 1 second (1000 milliseconds)
+                    wait( 1000 ); //wait 1 second (1000 milliseconds) before moving on to destroying the gems
 
+                    //Destroy chain and increment move counter
 		            destroyChain( game, toDestroy );
                     numMoves++;
 
+                    //This block handles new chains formed by the destruction of old chains
                     while( ( toDestroy = ChainItems.chainItems( game ) ).size() >= 3  ){
+                        //Highlight gems that will be destroyed
                         Gem.highlight( game, toDestroy, true );
                         Screen.updateBoard( game, numMoves, points );
                         wait( 1000 );
+
                         points += toDestroy.size();
                         destroyChain( game, toDestroy );
                     }
-                } else {
+                } else { //If no chain formed, swap back the gems
                     swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );   
                 }
 
+                //Highlight the new gem that the cursor is over
                 game[row][col].highlight( true );
                 //Update board
                 Screen.updateBoard( game, numMoves, points );
 
-            } else {
+            } else { //If selected gems not next to each other
+                //Make sure that the last selected gem is highlighted so that the cursor is visible
+                game[ sGem[1][0] ][ sGem[1][1] ].highlight( true );
+                Screen.updateGem( game, sGem[1][0], sGem[1][1] );
+
                 Screen.load();
                 System.out.print( "Selected gems not next to each other. Press enter to continue." );
                 Screen.promptUser( sc );
             }
-
 
         }
         System.out.print( "\nGame over! Press enter to exit. " );
