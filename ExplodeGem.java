@@ -74,12 +74,11 @@ public class ExplodeGem extends SuperGem {
 		}
 	    }
 	}
-	System.out.println (arr); 
 	return arr; 
     }
 
     public String toString () {
-	return Woo.esc + color + "mo" + Woo.esc + "0m";
+        return Woo.esc + color + "mo" + Woo.esc + "0m";
     }
     
 }

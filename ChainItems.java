@@ -96,11 +96,14 @@ public class ChainItems{
     public static void main(String[] args){
         Gem[][] board = new Gem[10][10];
         Woo.populate(board);
+        /*
         for( int i = 0; i < board.length; i++ ){
             board[i][4] = new Gem(31);
             board[4][i] = new Gem(31);
         }
+        */
         System.out.println( Woo.arrToStr(board) );
+        /*
         ArrayList<Integer[]> chain = chainItems( board );
         System.out.println( "Row\tColumn" );
         for( Integer[] i: chain ){
@@ -109,6 +112,7 @@ public class ChainItems{
             }
             System.out.println();
         }
+        */
     }
 
 }
