@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Gem{
 
     protected int color;
@@ -60,4 +61,11 @@ public class Gem{
         highlighted = false;
         selected = false;
     }
+
+    public static void highlight( Gem[][] game, ArrayList<Integer[]> chain, boolean state ){
+        for( Integer[] i: chain ){
+            game[ i[0] ][ i[1] ].highlight( state );
+        }
+    }
+
 }

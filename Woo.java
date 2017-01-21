@@ -2,6 +2,15 @@ import java.util.Scanner;
 import java.util.ArrayList;
 public class Woo{
 
+    //Waits the given number of milliseconds
+    public static void wait( int time ){
+        try{ 
+            Thread.sleep( time );
+        } catch( Exception e ){
+
+        }
+    }
+
     //Returns string version of the game board
     public static String arrToStr( Gem[][] arr ){
         String retStr = "";
@@ -86,6 +95,13 @@ public class Woo{
             return true;
         }
         return false;
+    }
+
+    //destroys the given chains
+    public static void destroyChain( Gem[][] game, ArrayList<Integer[]> toDestroy ){
+        for( Integer[] i: toDestroy ){
+            game[ i[0] ][ i[1] ] = new Gem();
+        }
     }
 
     public static void printHelp(){
@@ -193,26 +209,34 @@ public class Woo{
             if( isNextTo( sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] ) ){
 
                 swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
-                points += ChainItems.chainItems( game ).size();
+                ArrayList<Integer[]> toDestroy = ChainItems.chainItems( game );
+                points += toDestroy.size();
 
-                if( destroyChain(game) ){
-		    
+                //public static void highlight( Gem[][] game, ArrayList<Integer[]> chain, boolean state ){
+                if( toDestroy.size() >= 3 ){
+                    //Highlight the gems that will be destroyed
+                    Gem.highlight( game, toDestroy, true );
+                    Screen.updateBoard( game, numMoves, points );
+                    wait( 1000 ); //wait 1 second (1000 milliseconds)
+
+		            destroyChain( game, toDestroy );
                     numMoves++;
-                    while( destroyChain(game) ){
-                        //remove the new chains that are formed by old chains being replaced
+
+                    while( ( toDestroy = ChainItems.chainItems( game ) ).size() >= 3  ){
+                        Gem.highlight( game, toDestroy, true );
+                        Screen.updateBoard( game, numMoves, points );
+                        wait( 1000 );
+                        points += toDestroy.size();
+                        destroyChain( game, toDestroy );
                     }
                 } else {
                     swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );   
                 }
 
-                //Update board
-                Screen.clear();
-                System.out.print(arrToStr( game ) + "\n\n"  );
-                System.out.println( "Moves left: " + (10 - numMoves) );
-                System.out.println( "Points: " + points );
-
                 game[row][col].highlight( true );
-                Screen.updateGem( game, row, col );
+                //Update board
+                Screen.updateBoard( game, numMoves, points );
+
             } else {
                 Screen.load();
                 System.out.print( "Selected gems not next to each other. Press enter to continue." );

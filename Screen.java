@@ -86,4 +86,11 @@ public class Screen{
         Screen.load();
     }
 
+    public static void updateBoard( Gem[][] game, int numMoves, int points ){
+        Screen.clear();
+        System.out.print( Woo.arrToStr( game ) + "\n\n"  );
+        System.out.println( "Moves left: " + (10 - numMoves) );
+        System.out.println( "Points: " + points );
+    }
+
 }

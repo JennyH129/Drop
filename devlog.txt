@@ -86,7 +86,7 @@ Jenny Han :: Added subclass of SuperGem called ExplodeGem and added point system
 
 2017-01-21
 --------------------------------------------------------------
-Arif Roktim :: Selected gems now stay highlighted. Player can now deselect gems by selecting them again.
+Arif Roktim :: Selected gems now stay highlighted. Player can now deselect gems by selecting them again. Chains of gems are highlighted before they are destroyed.
 Levi Olevsky :: <Thing member did.>
 Jenny Han :: <Thing member did.>
 ==============================================================
