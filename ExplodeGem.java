@@ -1,5 +1,16 @@
 import java.util.ArrayList;
 public class ExplodeGem extends SuperGem {
+
+    public ExplodeGem(){
+        color = (int)(Math.random() * 6 + 31);
+        character="o";
+    }
+
+    public ExplodeGem(int newColor){
+        color = newColor;
+        character="o";
+    }
+
     public ArrayList <Integer[]> special (Gem [][] board, int row, int col) {
 	ArrayList <Integer []> arr = new ArrayList <Integer[]> ();
 	//If the special gem is in a corner of the board, add the three gems around it and the gem itself
@@ -77,9 +88,5 @@ public class ExplodeGem extends SuperGem {
 	return arr; 
     }
 
-    public String toString () {
-        return Screen.ESC + color + "mo" + Screen.ESC + "0m";
-    }
-    
 }
 	    

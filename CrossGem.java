@@ -1,5 +1,16 @@
 import java.util.ArrayList;
 public class CrossGem extends SuperGem{
+
+    public CrossGem(){
+        color = (int)(Math.random() * 6 + 31);
+        character="+";
+    }
+
+    public CrossGem(int newColor){
+        color = newColor;
+        character="+";
+    }
+
     public ArrayList<Integer[]> special (Gem [] [] board, int row, int col) {
 	ArrayList<Integer []> arr = new ArrayList <Integer[]> ();
 
@@ -11,11 +22,6 @@ public class CrossGem extends SuperGem{
 	}
 	return arr;
     }
-
-
-    public String toString () {
-	return Screen.ESC + color + "m+" + Screen.ESC + "0m";
-    } 
 
 }
 	

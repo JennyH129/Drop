@@ -14,6 +14,7 @@ public class Screen{
         System.out.print( ESC + "u" );
     }
 
+    //Sets the color
     public static void setColor( int color ){
         System.out.print( ESC + color + "m" );
     }
@@ -21,6 +22,11 @@ public class Screen{
     //Removes all formatting
     public static void resetColor(){
         System.out.print( ESC + "0m" );
+    }
+
+    //Returns a color
+    public static String retColor( int color ){
+        return ESC + color + "m";
     }
 
     //Clears screen and moves cursor to top left corner
