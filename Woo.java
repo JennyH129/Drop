@@ -99,34 +99,41 @@ public class Woo{
 
     //destroys the given chains
     public static void destroyChain( Gem[][] game, ArrayList<Integer[]> toDestroy ){
-	int gemType; 
+        int gemType; 
         for( Integer[] i: toDestroy ){
-	    gemType = (int) (Math.random() * 20);
-	    if (gemType == 1) {
-		game [i[0]] [i[1]] = new CrossGem();
-	    }
-	    else if (gemType == 2) {
-		game[ i[0] ][ i[1] ] = new ColorGem();
-	    }
-	    else if (gemType == 3) {
-		game[ i[0] ][ i[1] ] = new ExplodeGem ();
-	    } 
-	    else {
-		game[ i[0] ][ i[1] ] = new Gem();
-	    }
+            gemType = (int) (Math.random() * 20);
+            if (gemType == 1) {
+                game [i[0]] [i[1]] = new CrossGem();
+            }
+            else if (gemType == 2) {
+                game[ i[0] ][ i[1] ] = new ColorGem();
+            }
+            else if (gemType == 3) {
+                game[ i[0] ][ i[1] ] = new ExplodeGem ();
+            } 
+            else {
+                game[ i[0] ][ i[1] ] = new Gem();
+            }
         }
     }
 
     public static void printHelp(){
         Screen.clear();
-        String help =   " CONTROLS \n" 
-            +           "   w e     Press w, a, s, or d and then hit enter to move your cursor.\n"  
-            +           " a s d     Press e to select the current gem. Select two gems to swap them.\n"
-            +           "           \n"
-            +           " GAMEPLAY: Swaps are only allowed if they result in a chain of 3 gems*.\n"
-            +           "           Get a chain of 3 gems in a row to destroy the chain. The gems will be replaced by new random gems.\n"
-            +           "           Moves are only counted if they result in a valid swap. You have 4 swaps before the game ends.\n"
-            +           "           \n"
+        String help =   " ================ BEJEWELED ================ \n"
+            +           " \n"
+            +           " CONTROLS: \n" 
+            +           "   w e     Enter w, a, s, or d to move the cursor.\n"
+            +           " a s d     Press e to select/deselect the current gem. \n"
+            +           " \n"
+            +           " GAMEPLAY: Select two gems to swap them. \n"
+            +           "           Swaps are only allowed if they result in a chain of 3 or more gems. \n"
+            +           "           Get a chain of 3 gems in a row to destroy the chain. \n"
+            +           " \n"
+            +           " SUPER GEMS: # regular gem \n" 
+            +           "             o exploding gem (destroys all gems in a 3x3 area around this gem) \n"
+            +           "             + cross gem (destroys all the gems in the same column and row) \n "
+            +           "            x color gem (destroys all gems of the same color) \n"
+            +           " \n"
             +           " Press enter to continue.";
         System.out.print( help );
     }
@@ -170,7 +177,7 @@ public class Woo{
 
             while( numSelectedGems < 2 ){
                 //Get user input
-                s = Screen.promptUser( "Input (w/a/s/d/e): ", sc );
+                s = Screen.promptUser( "Input (h for help): ", sc );
 
                 //Unhighlight the gem the cursor used to be on
                 game[row][col].highlight( false );
@@ -196,6 +203,10 @@ public class Woo{
                         numSelectedGems++;
                         game[row][col].select( true ); //force the gem to stay highlighted
                     }
+                } else if( s.equals("h") ){
+                    printHelp();
+                    Screen.promptUser( sc );
+                    Screen.updateBoard( game, numMoves, points );
                 } else { //Invalid input so print error message
                     Screen.load(); 
                     System.out.print( "Input or move invalid. Press enter to continue. " );
