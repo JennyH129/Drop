@@ -19,6 +19,7 @@ Detect if there aren't any moves possible.
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+We learned about how to use escape sequences to change colors, background colors, etc., which helped with gem selection. 
 
 
 MID-DEVELOPMENT DESIGN CHANGES
@@ -51,7 +52,7 @@ Arif Roktim :: Coded basic Gem class. Let user input. Coded board updating for g
 2017-01-12
 --------------------------------------------------------------
 Arif Roktim and Levi Olevsky:: Completed class gem and added coloring, moved populate and arrToStr to Woo.java
-Jenny Han:: Wrote method swap and chainCheck 
+Jenny Han:: Started method swap and chainCheck 
 All ::  Let user select gems to swap. Detected some chains and replaced them with new random gems. Chain detection is a WIP.
 ==============================================================
 
@@ -74,24 +75,22 @@ Arif Roktim :: Added call to isNextTo() method in driver file. Implemented horiz
 2017-01-19
 --------------------------------------------------------------
 Arif Roktim :: Fixed bug in horizontal chain checking. Completed chain checking by adding vertical chain checking. Made sure game board doesn't start with chains in it already. Made SuperGems destroy appropriate gems when used.
-Jenny Han :: Implemented class SuperGem and its subclasses. Added special gems to the game board.
+Jenny Han :: Implemented class SuperGem and its subclasses. Added special gems to the game board and wrote their special methods
 ==============================================================
 
 2017-01-20
 --------------------------------------------------------------
 Arif Roktim :: Refactored code related to screen manipulation. Methods for the screen are in Screen.java. Woo.java now prints moves left.
 Levi Olevsky :: Started noDupe() method
-Jenny Han :: Added subclass of SuperGem called ExplodeGem and added point system
+Jenny Han :: Added subclass of SuperGem called ExplodeGem and wrote its special method and added point system
 ==============================================================
 
 2017-01-21
 --------------------------------------------------------------
 Arif Roktim :: Selected gems now stay highlighted. Player can now deselect gems by selecting them again. Chains of gems are highlighted before they are destroyed.
-Levi Olevsky :: <Thing member did.>
-Jenny Han :: <Thing member did.>
 ==============================================================
 
-yyyy-mm-dd
+2017-01-22
 --------------------------------------------------------------
 Arif Roktim :: <Thing member did.>
 Levi Olevsky :: <Thing member did.>
