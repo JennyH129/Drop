@@ -89,6 +89,7 @@ public class Screen{
     public static void updateBoard( Gem[][] game, int numMoves, int points ){
         Screen.clear();
         System.out.print( Woo.arrToStr( game ) + "\n\n"  );
+	System.out.println ("Gem key \n # regular gem \n o exploding gem (destroys all the gems around this gem) \n + cross gem (destroys all the gems in the same column and row) \n x color gem (destroys all gems of the same color)"); 
         System.out.println( "Moves left: " + (10 - numMoves) );
         System.out.println( "Points: " + points );
     }

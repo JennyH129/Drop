@@ -99,8 +99,21 @@ public class Woo{
 
     //destroys the given chains
     public static void destroyChain( Gem[][] game, ArrayList<Integer[]> toDestroy ){
+	int gemType; 
         for( Integer[] i: toDestroy ){
-            game[ i[0] ][ i[1] ] = new Gem();
+	    gemType = (int) (Math.random() * 20);
+	    if (gemType == 1) {
+		game [i[0]] [i[1]] = new CrossGem();
+	    }
+	    else if (gemType == 2) {
+		game[ i[0] ][ i[1] ] = new ColorGem();
+	    }
+	    else if (gemType == 3) {
+		game[ i[0] ][ i[1] ] = new ExplodeGem ();
+	    } 
+	    else {
+		game[ i[0] ][ i[1] ] = new Gem();
+	    }
         }
     }
 
