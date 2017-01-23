@@ -93,7 +93,7 @@ Arif Roktim :: Selected gems now stay highlighted. Player can now deselect gems 
 2017-01-22
 --------------------------------------------------------------
 Arif Roktim :: <Thing member did.>
-Levi Olevsky :: <Thing member did.>
+Levi Olevsky :: Gems now succum to gravity and new gems are introuduced in the top row instead of replacing the broken gem
 Jenny Han :: <Thing member did.>
 ==============================================================
 
