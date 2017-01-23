@@ -2,7 +2,6 @@ import java.util.ArrayList;
 public class Gem{
 
     protected int color;
-    protected boolean locked;
     protected String character;
     protected boolean highlighted = false;
     protected boolean selected = false;
