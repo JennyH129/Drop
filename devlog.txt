@@ -92,8 +92,14 @@ Arif Roktim :: Selected gems now stay highlighted. Player can now deselect gems 
 
 2017-01-22
 --------------------------------------------------------------
-Arif Roktim :: <Thing member did.>
-Levi Olevsky :: Gems now succum to gravity and new gems are introuduced in the top row instead of replacing the broken gem
-Jenny Han :: <Thing member did.>
+Arif Roktim :: Fixed bug where SuperGems would not be expanded when they were destroyed by another SuperGem. Expanding means that the gems that the SuperGem is supposed to destroy are destroyed.
+Levi Olevsky :: Gems now succumb to gravity and new gems are introduced in the top row instead of replacing the broken gem
+Jenny Han :: Made it so that destroyed gems can be replaced by SuperGems too.
 ==============================================================
 
+yyyy-mm-dd
+--------------------------------------------------------------
+<Member> :: <Thing member did.>
+<Member> :: <Thing member did.>
+<Member> :: <Thing member did.>
+==============================================================
