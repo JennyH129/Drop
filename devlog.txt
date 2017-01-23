@@ -11,15 +11,15 @@ Bejeweled
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Managed to somewhat achieve MVP in time.
-Chain detection finally done.
+Chain detection finally done. Took a while to perfect and we started over once.
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Detect if there aren't any moves possible.
+We don't detect if there aren't any moves possible.
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-We learned about how to use escape sequences to change colors, background colors, etc., which helped with gem selection. 
+We learned about how to use escape sequences to change colors, background colors, move the cursor, etc., which helped with gem selection. 
 
 
 MID-DEVELOPMENT DESIGN CHANGES
@@ -30,6 +30,7 @@ LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Incremental development is very important.
 Diagnostic print statements are very useful.
+Restarting is ok.
 ||||||||||||||||||||||||||||||||||||||||||
 
 
@@ -92,7 +93,7 @@ Arif Roktim :: Selected gems now stay highlighted. Player can now deselect gems 
 
 2017-01-22
 --------------------------------------------------------------
-Arif Roktim :: Fixed bug where SuperGems would not be expanded when they were destroyed by another SuperGem. Expanding means that the gems that the SuperGem is supposed to destroy are destroyed.
+Arif Roktim :: Fixed bug where SuperGems would not be expanded when they were destroyed by another SuperGem. Expanding means adding to a chain, all the gems that the Super Gem will destroy.
 Levi Olevsky :: Gems now succumb to gravity and new gems are introduced in the top row instead of replacing the broken gem
 Jenny Han :: Made it so that destroyed gems can be replaced by SuperGems too.
 ==============================================================
