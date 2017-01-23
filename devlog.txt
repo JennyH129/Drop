@@ -24,7 +24,8 @@ We learned about how to use escape sequences to change colors, background colors
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Features scrapped: 2nd game mode, locked gems, power up shop, leaderboards system
+Features scrapped: timed game mode, locked gems, power up shop, leaderboards system
+Reason features scrapped: Not enough time.
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
