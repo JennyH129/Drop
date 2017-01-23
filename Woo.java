@@ -11,6 +11,83 @@ public class Woo{
         }
     }
 
+    //================CHAIN CHECKING METHODS START================/*
+    //Returns a list of the positions of chains
+    public static ArrayList<Integer[]> chainItems( Gem[][] arr ){
+        ArrayList<Integer[]> chain = chainItemsRow( arr );
+        for( Integer[] i: chainItemsColumn( arr ) ){
+            chain.add( i );
+        }
+        //If a gem is a superGem, also add the gems that the supergem would destroy.
+        int size = chain.size();
+        for( int i = 0; i < size; i++ ){
+            Integer[] gem = chain.get(i);
+            if( arr[ gem[0] ][ gem[1] ] instanceof SuperGem ){
+                ArrayList<Integer[]> specialChain = ( (SuperGem)arr[ gem[0] ][ gem[1] ] ).special( arr, gem[0], gem[1] );
+                for( Integer[] j: specialChain ){
+                    chain.add( j );
+                }
+            }
+        }
+        return chain;
+    }
+
+    //Returns horizontal chains
+    private static ArrayList<Integer[]> chainItemsRow( Gem[][] arr ){
+        ArrayList<Integer[]> chain = new ArrayList<Integer[]>();
+	
+        //Iterate through each row looking for chains
+        for( int row = 0; row < arr.length; row++ ){
+            for( int col = 0; col < arr[row].length; col++ ){
+                int chainLen = 1; //Length of current chain
+                //While the next gem matches the current gem, increase the size of our chain
+                for( int i = col; i < arr[row].length; i++ ){
+                    if( (i < arr[row].length - 1 ) && arr[row][i].equals( arr[row][i + 1] ) ){
+                        chainLen++;
+                    } else{
+                        if( chainLen >= 3 ){ //if the chain length is greater than or equal to 3, add the chain
+                            for( int j = col; j <= i; j++ ){
+                                chain.add( new Integer[] { row, j } );
+                            }
+                        }
+                        col = i;
+                        break;
+                    }
+                }
+            }
+        }
+        return chain;
+    }
+
+    //Returns vertical chains
+    private static ArrayList<Integer[]> chainItemsColumn( Gem[][] arr ){
+        ArrayList<Integer[]> chain = new ArrayList<Integer[]>();
+
+        //Iterate through each column looking for chains
+        for( int col = 0; col < arr[0].length; col++ ){
+            for( int row = 0; row < arr.length; row++ ){
+
+                int chainLen = 1;
+                for( int i = row; i < arr.length; i++ ){
+                    if( (i < arr.length - 1) && arr[i][col].equals( arr[i + 1][col] ) ){
+                        chainLen++;
+                    } else {
+                        if( chainLen >= 3 ){
+                            for( int j = row; j <= i; j++ ){
+                                chain.add( new Integer[] { j, col } );
+                            }
+                        }
+                        row = i;
+                        break;
+                    }
+                }
+
+            }
+        }
+        return chain;
+    }
+    //================CHAIN CHECKING METHODS END================*/
+
     //Returns string version of the game board
     public static String arrToStr( Gem[][] arr ){
         String retStr = "";
@@ -86,7 +163,7 @@ public class Woo{
      */
     public static boolean destroyChain( Gem[][] game ){
         //Build an array of the positions of the gems that will be destroyed later
-        ArrayList<Integer[]> toDestroy = ChainItems.chainItems( game );
+        ArrayList<Integer[]> toDestroy = chainItems( game );
 
         if( toDestroy.size() >= 3 ){
             for( Integer[] i: toDestroy ){
@@ -256,7 +333,7 @@ public class Woo{
 
                 swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
                 //Array holding the coordinates of gems to be destroyed
-                ArrayList<Integer[]> toDestroy = ChainItems.chainItems( game );
+                ArrayList<Integer[]> toDestroy = chainItems( game );
                 //Add 1 point for each gem to be destroyed
                 points += toDestroy.size();
 
@@ -278,7 +355,7 @@ public class Woo{
 		    }
 		    
                     //This block handles new chains formed by the destruction of old chains
-                    while( ( toDestroy = ChainItems.chainItems( game ) ).size() >= 3  ){
+                    while( ( toDestroy = chainItems( game ) ).size() >= 3  ){
                         //Highlight gems that will be destroyed
                         Gem.highlight( game, toDestroy, true );
                         Screen.updateBoard( game, numMoves, points );
