@@ -179,6 +179,8 @@ public class Woo{
         return false;
     }
 
+    //Adds all the gems that a supergem would destroy to the given chain.
+    //Returns the added gems
     public static ArrayList<Integer[]> expandSuperGems( Gem[][] game, ArrayList<Integer[]> chain ){
         ArrayList<Integer[]> newChains = new ArrayList<Integer[]>();
         //If a gem is a superGem, also add the gems that the supergem would destroy.
@@ -358,7 +360,7 @@ public class Woo{
                         //Highlight the gems that will be destroyed
                         Gem.highlight( game, toDestroy, true );
                         Screen.updateBoard( game, numMoves, points );
-                        wait( 750 ); //wait .5 seconds (1000 milliseconds) before moving on to destroying the gems
+                        wait( 750 ); //wait .75 seconds (750 milliseconds) before moving on to destroying the gems
 
                         while( hasSuperGems( game, toDestroy ) ){
                             Gem.highlight( game, expandSuperGems( game, toDestroy ), true );       
