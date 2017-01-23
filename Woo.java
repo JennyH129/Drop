@@ -99,24 +99,8 @@ public class Woo{
 
     //destroys the given chains
     public static void destroyChain( Gem[][] game, ArrayList<Integer[]> toDestroy ){
-        int gemType; 
-        for( Integer[] i: toDestroy ){
+	for( Integer[] i: toDestroy ){
 	    game [i[0]] [i[1]] = new Gem(30);
-	    /*
-            gemType = (int) (Math.random() * 20);
-            if (gemType == 1) {
-                game [i[0]] [i[1]] = new CrossGem();
-            }
-            else if (gemType == 2) {
-                game[ i[0] ][ i[1] ] = new ColorGem();
-            }
-            else if (gemType == 3) {
-                game[ i[0] ][ i[1] ] = new ExplodeGem ();
-            } 
-            else {
-                game[ i[0] ][ i[1] ] = new Gem();
-            }
-	    */
         }
     }
 
@@ -131,11 +115,24 @@ public class Woo{
     }
 
     public static void replaceTheVoid(Gem[][] game){
-	for(int col = 0; col < game[0].length; col++){
-	    if(game[0][col].color == 30){
-		game[0][col] = new Gem();
-	    }
-	}
+	 int gemType; 
+	 for(int col = 0; col < game[0].length; col++){
+	     if(game[0][col].color == 30){
+		 gemType = (int) (Math.random() * 20);
+		 if (gemType == 1) {
+		     game [0][col] = new CrossGem();
+		 }
+		 else if (gemType == 2) {
+		     game[0][col] = new ColorGem();
+		 }
+		 else if (gemType == 3) {
+		     game[0][col] = new ExplodeGem ();
+		 } 
+		 else {
+		     game[0][col] = new Gem();
+		 }
+	     }
+	 }
     }
     
     public static void printHelp(){
