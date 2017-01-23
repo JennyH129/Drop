@@ -24,7 +24,7 @@ public class Woo{
     //Returns horizontal chains
     private static ArrayList<Integer[]> chainItemsRow( Gem[][] arr ){
         ArrayList<Integer[]> chain = new ArrayList<Integer[]>();
-	
+
         //Iterate through each row looking for chains
         for( int row = 0; row < arr.length; row++ ){
             for( int col = 0; col < arr[row].length; col++ ){
@@ -165,8 +165,8 @@ public class Woo{
 
     //destroys the given chains
     public static void destroyChain( Gem[][] game, ArrayList<Integer[]> toDestroy ){
-	for( Integer[] i: toDestroy ){
-	    game [i[0]] [i[1]] = new Gem(30);
+        for( Integer[] i: toDestroy ){
+            game [i[0]] [i[1]] = new Gem(30);
         }
     }
 
@@ -199,36 +199,36 @@ public class Woo{
 
     //This method DROPS the gems down when the gems underneath them are destroyed
     public static void fall( Gem[][] game){
-	for(int row = 0; row < game.length - 1; row++){
-	    for(int col = 0; col < game[0].length; col++){
-		if(game[row + 1][col].color == 30){
-		    swap(game, row, col, row + 1, col);
-		}
-	    }
-	}
+        for(int row = 0; row < game.length - 1; row++){
+            for(int col = 0; col < game[0].length; col++){
+                if(game[row + 1][col].color == 30){
+                    swap(game, row, col, row + 1, col);
+                }
+            }
+        }
     }
 
     //Fills the voids in the game board with new random gems
     //Doesn't fill the voids in me
     public static void replaceTheVoid(Gem[][] game){
-	 int gemType; 
-	 for(int col = 0; col < game[0].length; col++){
-	     if(game[0][col].color == 30){
-		 gemType = (int) (Math.random() * 75);
-		 if (gemType == 1) {
-		     game [0][col] = new CrossGem();
-		 }
-		 else if (gemType == 2) {
-		     game[0][col] = new ColorGem();
-		 }
-		 else if (gemType == 3) {
-		     game[0][col] = new ExplodeGem ();
-		 } 
-		 else {
-		     game[0][col] = new Gem();
-		 }
-	     }
-	 }
+        int gemType; 
+        for(int col = 0; col < game[0].length; col++){
+            if(game[0][col].color == 30){
+                gemType = (int) (Math.random() * 75);
+                if (gemType == 1) {
+                    game [0][col] = new CrossGem();
+                }
+                else if (gemType == 2) {
+                    game[0][col] = new ColorGem();
+                }
+                else if (gemType == 3) {
+                    game[0][col] = new ExplodeGem ();
+                } 
+                else {
+                    game[0][col] = new Gem();
+                }
+            }
+        }
     }
 
     public static void printHelp(){
@@ -261,175 +261,175 @@ public class Woo{
 
         printHelp();
         Screen.promptUser( sc ); //Press enter to continue
-        
+
         boolean playAgain = true;
         while( playAgain ){
-        //Initial values
-        int numMoves = 0;
-        int numSelectedGems = 0;
-        int points = 0;
-        //Initial cursor points
-        int row = 0;
-        int col = 0;
+            //Initial values
+            int numMoves = 0;
+            int numSelectedGems = 0;
+            int points = 0;
+            //Initial cursor points
+            int row = 0;
+            int col = 0;
 
 
-        //Clear screen, initialize 2d Gem array, and print board
-        Screen.clear();
-        Gem [] [] game = newGame();
-        Screen.updateBoard( game, numMoves, points );
+            //Clear screen, initialize 2d Gem array, and print board
+            Screen.clear();
+            Gem [] [] game = newGame();
+            Screen.updateBoard( game, numMoves, points );
 
-        /* sGem is a 2d array holding the coordinates of selected gems
-           Each first level element represents the coordinates of a single gem. The 0th item is the row, the 1st item is the column.
-           Example:
-           [ 
-            Gem 0: [ row, col ]
-            Gem 1: [ row, col ]
-           ]
-        */
-        int[][] sGem = new int[2][2];
+            /* sGem is a 2d array holding the coordinates of selected gems
+               Each first level element represents the coordinates of a single gem. The 0th item is the row, the 1st item is the column.
+               Example:
+               [ 
+                 Gem 0: [ row, col ]
+                 Gem 1: [ row, col ]
+               ]
+            */
+            int[][] sGem = new int[2][2];
 
-        //Highlight starting point
-        game[row][col].highlight( true );
-        Screen.updateGem( game, row, col );
+            //Highlight starting point
+            game[row][col].highlight( true );
+            Screen.updateGem( game, row, col );
 
-        while( numMoves < 10 ){
+            while( numMoves < 10 ){
 
-            while( numSelectedGems < 2 ){
-                //Get user input
-                s = Screen.promptUser( "Input (h for help): ", sc );
+                while( numSelectedGems < 2 ){
+                    //Get user input
+                    s = Screen.promptUser( "Input (h for help): ", sc );
 
-                //Unhighlight the gem the cursor used to be on
-                game[row][col].highlight( false );
-                Screen.updateGem( game, row, col );
+                    //Unhighlight the gem the cursor used to be on
+                    game[row][col].highlight( false );
+                    Screen.updateGem( game, row, col );
 
-                //This block handles input
-                if( s.equals("w") && row > 0 ){
-                    row--;
-                } else if( s.equals("s") && row < game.length - 1 ){
-                    row++;
-                } else if( s.equals("a") && col > 0 ){
-                    col--;
-                } else if( s.equals("d") && col < game[row].length - 1 ){
-                    col++;
-                } else if( s.equals("e") ){
-                    //If you select the same gem again, deselect it
-                    if( numSelectedGems == 1 && sGem[0][0] == row && sGem[0][1] == col ){ 
-                        numSelectedGems--;
-                        game[ sGem[0][0] ][ sGem[0][1] ].select( false );
-                    } else { //Else add the selected gem and select it
-                        sGem[ numSelectedGems ][0] = row;
-                        sGem[ numSelectedGems ][1] = col; 
-                        numSelectedGems++;
-                        game[row][col].select( true ); //force the gem to stay highlighted
-                    }
-                } else if( s.equals("h") ){
-                    printHelp();
-                    Screen.promptUser( sc );
-                    Screen.updateBoard( game, numMoves, points );
-                } else { //Invalid input so print error message
-                    Screen.load(); 
-                    System.out.print( "Input or move invalid. Press enter to continue. " );
-                    Screen.promptUser( sc );
-                }
-                
-                //Highlight the gem the cursor is over
-                game[row][col].highlight( true );
-                //Update gem
-                Screen.updateGem( game, row, col );
-            }
-
-            numSelectedGems = 0;
-            //Deselect and unhighlight the selected gems
-            game[ sGem[0][0] ][ sGem[0][1] ].turnOff();
-            Screen.updateGem( game, sGem[0][0], sGem[0][1] );
-            game[ sGem[1][0] ][ sGem[1][1] ].turnOff();
-            Screen.updateGem( game, sGem[1][0], sGem[1][1] );
-
-            if( isNextTo( sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] ) ){
-
-                swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
-                //Array holding the coordinates of gems to be destroyed
-                ArrayList<Integer[]> toDestroy = chainItems( game );
-                //Add 1 point for each gem to be destroyed
-                points += toDestroy.size();
-
-                //If chain formed
-                if( toDestroy.size() >= 3 ){
-                    //Highlight the gems that will be destroyed
-                    Gem.highlight( game, toDestroy, true );
-                    Screen.updateBoard( game, numMoves, points );
-                    wait( 750 ); //wait .5 seconds (1000 milliseconds) before moving on to destroying the gems
-
-                    while( hasSuperGems( game, toDestroy ) ){
-                        Gem.highlight( game, expandSuperGems( game, toDestroy ), true );       
+                    //This block handles input
+                    if( s.equals("w") && row > 0 ){
+                        row--;
+                    } else if( s.equals("s") && row < game.length - 1 ){
+                        row++;
+                    } else if( s.equals("a") && col > 0 ){
+                        col--;
+                    } else if( s.equals("d") && col < game[row].length - 1 ){
+                        col++;
+                    } else if( s.equals("e") ){
+                        //If you select the same gem again, deselect it
+                        if( numSelectedGems == 1 && sGem[0][0] == row && sGem[0][1] == col ){ 
+                            numSelectedGems--;
+                            game[ sGem[0][0] ][ sGem[0][1] ].select( false );
+                        } else { //Else add the selected gem and select it
+                            sGem[ numSelectedGems ][0] = row;
+                            sGem[ numSelectedGems ][1] = col; 
+                            numSelectedGems++;
+                            game[row][col].select( true ); //force the gem to stay highlighted
+                        }
+                    } else if( s.equals("h") ){
+                        printHelp();
+                        Screen.promptUser( sc );
                         Screen.updateBoard( game, numMoves, points );
-                        wait( 750 );
+                    } else { //Invalid input so print error message
+                        Screen.load(); 
+                        System.out.print( "Input or move invalid. Press enter to continue. " );
+                        Screen.promptUser( sc );
                     }
 
-                    //Destroy chain and increment move counter
+                    //Highlight the gem the cursor is over
+                    game[row][col].highlight( true );
+                    //Update gem
+                    Screen.updateGem( game, row, col );
+                }
+
+                numSelectedGems = 0;
+                //Deselect and unhighlight the selected gems
+                game[ sGem[0][0] ][ sGem[0][1] ].turnOff();
+                Screen.updateGem( game, sGem[0][0], sGem[0][1] );
+                game[ sGem[1][0] ][ sGem[1][1] ].turnOff();
+                Screen.updateGem( game, sGem[1][0], sGem[1][1] );
+
+                if( isNextTo( sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] ) ){
+
+                    swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );
+                    //Array holding the coordinates of gems to be destroyed
+                    ArrayList<Integer[]> toDestroy = chainItems( game );
+                    //Add 1 point for each gem to be destroyed
                     points += toDestroy.size();
-                    destroyChain( game, toDestroy );
-                    numMoves++;
 
-                    //Makes gems succumb to the inevitable force of Gravity
-                    for(int i = 0; i < 20; i++){
-                        fall(game);
-                        replaceTheVoid(game);
-                    }
-		    
-                    //This block handles new chains formed by the destruction of old chains
-                    while( ( toDestroy = chainItems( game ) ).size() >= 3  ){
-                        //Highlight gems that will be destroyed
+                    //If chain formed
+                    if( toDestroy.size() >= 3 ){
+                        //Highlight the gems that will be destroyed
                         Gem.highlight( game, toDestroy, true );
                         Screen.updateBoard( game, numMoves, points );
-                        wait( 750 );
+                        wait( 750 ); //wait .5 seconds (1000 milliseconds) before moving on to destroying the gems
 
                         while( hasSuperGems( game, toDestroy ) ){
                             Gem.highlight( game, expandSuperGems( game, toDestroy ), true );       
                             Screen.updateBoard( game, numMoves, points );
                             wait( 750 );
                         }
+
+                        //Destroy chain and increment move counter
                         points += toDestroy.size();
                         destroyChain( game, toDestroy );
+                        numMoves++;
+
+                        //Makes gems succumb to the inevitable force of Gravity
                         for(int i = 0; i < 20; i++){
                             fall(game);
                             replaceTheVoid(game);
                         }
+
+                        //This block handles new chains formed by the destruction of old chains
+                        while( ( toDestroy = chainItems( game ) ).size() >= 3  ){
+                            //Highlight gems that will be destroyed
+                            Gem.highlight( game, toDestroy, true );
+                            Screen.updateBoard( game, numMoves, points );
+                            wait( 750 );
+
+                            while( hasSuperGems( game, toDestroy ) ){
+                                Gem.highlight( game, expandSuperGems( game, toDestroy ), true );       
+                                Screen.updateBoard( game, numMoves, points );
+                                wait( 750 );
+                            }
+                            points += toDestroy.size();
+                            destroyChain( game, toDestroy );
+                            for(int i = 0; i < 20; i++){
+                                fall(game);
+                                replaceTheVoid(game);
+                            }
+                        }
+                    } else { //If no chain formed, swap back the gems
+                        swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );   
                     }
-                } else { //If no chain formed, swap back the gems
-                    swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );   
+
+                    //Highlight the new gem that the cursor is over
+                    game[row][col].highlight( true );
+                    //Update board
+                    Screen.updateBoard( game, numMoves, points );
+
+                } else { //If selected gems not next to each other
+                    //Make sure that the last selected gem is highlighted so that the cursor is visible
+                    game[ sGem[1][0] ][ sGem[1][1] ].highlight( true );
+                    Screen.updateGem( game, sGem[1][0], sGem[1][1] );
+
+                    Screen.load();
+                    System.out.print( "Selected gems not next to each other. Press enter to continue." );
+                    Screen.promptUser( sc );
                 }
 
-                //Highlight the new gem that the cursor is over
-                game[row][col].highlight( true );
-                //Update board
-                Screen.updateBoard( game, numMoves, points );
-
-            } else { //If selected gems not next to each other
-                //Make sure that the last selected gem is highlighted so that the cursor is visible
-                game[ sGem[1][0] ][ sGem[1][1] ].highlight( true );
-                Screen.updateGem( game, sGem[1][0], sGem[1][1] );
-
-                Screen.load();
-                System.out.print( "Selected gems not next to each other. Press enter to continue." );
-                Screen.promptUser( sc );
             }
-
-        }
-        System.out.println( "\nGame over!\nYour score was: " + points );
-        s = "";
-        while( !( s.equals("y") || s.equals("n") ) ){
-            s = Screen.promptUser( "Do you wish to play again (y/n)? ", sc );
-            if( s.equals("y") ){ //do nothing
-            } else if( s.equals("n") ){
-                playAgain = false;
-            } else {
-                System.out.print( "Input invalid. " );
+            System.out.println( "\nGame over!\nYour score was: " + points );
+            s = "";
+            while( !( s.equals("y") || s.equals("n") ) ){
+                s = Screen.promptUser( "Do you wish to play again (y/n)? ", sc );
+                if( s.equals("y") ){ //do nothing
+                } else if( s.equals("n") ){
+                    playAgain = false;
+                } else {
+                    System.out.print( "Input invalid. " );
+                }
             }
         }
-    }
-    System.out.println("");
+        System.out.println("");
     }
 }
-	
-	
+
+

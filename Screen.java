@@ -47,7 +47,7 @@ public class Screen{
     public static void moveTo( int row, int col ){
         System.out.print( ESC + row + ";" + col + "H" );
     }
-    
+
     //Move relative to current position
     public static void move( int row, int col ){
         if( row > 0 ){

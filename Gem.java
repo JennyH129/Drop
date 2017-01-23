@@ -43,7 +43,7 @@ public class Gem{
     }
 
     public int getColor(){
-	return color;
+        return color;
     }
 
     //If a gem is selected, it will always be highlighted
@@ -52,7 +52,7 @@ public class Gem{
         selected = state;
         highlighted = highlighted || state;
     }
-    
+
     //Makes a gem (un)highlighted. Selected gems cant be unhighlighted.
     public void highlight( boolean state ){
         highlighted = selected || state;

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 public class ColorGem extends SuperGem {
-    
+
     public ColorGem(){
         color = (int)(Math.random() * 6 + 31);
         character="x";
@@ -12,18 +12,18 @@ public class ColorGem extends SuperGem {
     }
 
     public ArrayList <Integer[]> special (Gem[][] board, int row, int col){
-	ArrayList <Integer[]> arr = new ArrayList <Integer[]> ();
-	//traverses the entire board to find gems of the same color as the special gem 
-	for ( int i = 0; i < board.length; i ++ ) {
-	    for (int j = 0; j < board[i].length; j ++) {
-		if (board[i][j].equals( board [row][col]) ) {
-		    arr.add (new Integer [] {i, j}); 			    
-		}
-	    }
-	}
-	return arr; 
+        ArrayList <Integer[]> arr = new ArrayList <Integer[]> ();
+        //traverses the entire board to find gems of the same color as the special gem 
+        for ( int i = 0; i < board.length; i ++ ) {
+            for (int j = 0; j < board[i].length; j ++) {
+                if (board[i][j].equals( board [row][col]) ) {
+                    arr.add (new Integer [] {i, j}); 			    
+                }
+            }
+        }
+        return arr; 
 
     }
-    
+
 } 
-    
+
