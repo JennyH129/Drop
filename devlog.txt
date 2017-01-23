@@ -16,6 +16,7 @@ Chain detection finally done. Took a while to perfect and we started over once.
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 We don't detect if there aren't any moves possible.
+Entering stuff while the screen is updating messes up the prompt. This is fixed after you swap two gems.
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
