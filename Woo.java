@@ -18,17 +18,6 @@ public class Woo{
         for( Integer[] i: chainItemsColumn( arr ) ){
             chain.add( i );
         }
-        //If a gem is a superGem, also add the gems that the supergem would destroy.
-        int size = chain.size();
-        for( int i = 0; i < size; i++ ){
-            Integer[] gem = chain.get(i);
-            if( arr[ gem[0] ][ gem[1] ] instanceof SuperGem ){
-                ArrayList<Integer[]> specialChain = ( (SuperGem)arr[ gem[0] ][ gem[1] ] ).special( arr, gem[0], gem[1] );
-                for( Integer[] j: specialChain ){
-                    chain.add( j );
-                }
-            }
-        }
         return chain;
     }
 
@@ -181,6 +170,34 @@ public class Woo{
         }
     }
 
+    public static boolean hasSuperGems( Gem[][] game, ArrayList<Integer[]> chain ){
+        for( Integer[] i: chain ){
+            if( game[ i[0] ][ i[1] ] instanceof SuperGem ){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static ArrayList<Integer[]> expandSuperGems( Gem[][] game, ArrayList<Integer[]> chain ){
+        ArrayList<Integer[]> newChains = new ArrayList<Integer[]>();
+        //If a gem is a superGem, also add the gems that the supergem would destroy.
+        int size = chain.size();
+        for( int i = 0; i < size; i++ ){
+            Integer[] gem = chain.get(i);
+            if( game[ gem[0] ][ gem[1] ] instanceof SuperGem ){
+                ArrayList<Integer[]> specialChain = ( (SuperGem)game[ gem[0] ][ gem[1] ] ).special( game, gem[0], gem[1] );
+                for( Integer[] j: specialChain ){
+                    chain.add( j );
+                    newChains.add( j );
+                }
+                game[ gem[0] ][ gem[1] ] = new Gem(30); //remove special gem after it's been expanded
+            }
+        }
+        return newChains;
+    }
+
+    //This method DROPS the gems down when the gems underneath them are destroyed
     public static void fall( Gem[][] game){
 	for(int row = 0; row < game.length - 1; row++){
 	    for(int col = 0; col < game[0].length; col++){
@@ -191,6 +208,8 @@ public class Woo{
 	}
     }
 
+    //Fills the voids in the game board with new random gems
+    //Doesn't fill the voids in me
     public static void replaceTheVoid(Gem[][] game){
 	 int gemType; 
 	 for(int col = 0; col < game[0].length; col++){
@@ -342,32 +361,44 @@ public class Woo{
                     //Highlight the gems that will be destroyed
                     Gem.highlight( game, toDestroy, true );
                     Screen.updateBoard( game, numMoves, points );
-                    wait( 1000 ); //wait 1 second (1000 milliseconds) before moving on to destroying the gems
+                    wait( 500 ); //wait .5 seconds (1000 milliseconds) before moving on to destroying the gems
+
+                    while( hasSuperGems( game, toDestroy ) ){
+                        Gem.highlight( game, expandSuperGems( game, toDestroy ), true );       
+                        Screen.updateBoard( game, numMoves, points );
+                        wait( 500 );
+                    }
 
                     //Destroy chain and increment move counter
-		    destroyChain( game, toDestroy );
-		    numMoves++;
+                    points += toDestroy.size();
+                    destroyChain( game, toDestroy );
+                    numMoves++;
 
-		    //Makes gems succumb to the inevitable force of Gravity
-		    for(int i = 0; i < 20; i++){
-			fall(game);
-			replaceTheVoid(game);
-		    }
+                    //Makes gems succumb to the inevitable force of Gravity
+                    for(int i = 0; i < 20; i++){
+                        fall(game);
+                        replaceTheVoid(game);
+                    }
 		    
                     //This block handles new chains formed by the destruction of old chains
                     while( ( toDestroy = chainItems( game ) ).size() >= 3  ){
                         //Highlight gems that will be destroyed
                         Gem.highlight( game, toDestroy, true );
                         Screen.updateBoard( game, numMoves, points );
-                        wait( 1000 );
+                        wait( 500 );
 
+                        while( hasSuperGems( game, toDestroy ) ){
+                            Gem.highlight( game, expandSuperGems( game, toDestroy ), true );       
+                            Screen.updateBoard( game, numMoves, points );
+                            wait( 500 );
+                        }
                         points += toDestroy.size();
                         destroyChain( game, toDestroy );
-			for(int i = 0; i < 20; i++){
-			    fall(game);
-			    replaceTheVoid(game);
-			}
-		    }
+                        for(int i = 0; i < 20; i++){
+                            fall(game);
+                            replaceTheVoid(game);
+                        }
+                    }
                 } else { //If no chain formed, swap back the gems
                     swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );   
                 }
