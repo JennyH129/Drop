@@ -95,7 +95,7 @@ public class Woo{
         int gemType = 0; 
         for( int i = 0; i < arr.length; i++ ){
             for( int j = 0; j < arr[i].length; j++ ){
-                gemType = (int) (Math.random() * 20);
+                gemType = (int) (Math.random() * 50);
                 if (gemType == 1) {
                     arr[i][j] = new CrossGem();
                 }
@@ -214,7 +214,7 @@ public class Woo{
 	 int gemType; 
 	 for(int col = 0; col < game[0].length; col++){
 	     if(game[0][col].color == 30){
-		 gemType = (int) (Math.random() * 20);
+		 gemType = (int) (Math.random() * 75);
 		 if (gemType == 1) {
 		     game [0][col] = new CrossGem();
 		 }
@@ -245,13 +245,10 @@ public class Woo{
             +           "          Get a chain of 3 gems in a row to destroy the chain.\n"
             +           "\n"
             +           "SUPER GEMS: \n"
-            +           "  -# regular gem \n" 
-            +           "  -o exploding gem (destroys all gems in a 3x3 area around this gem) \n"
-            +           "  -+ cross gem (destroys all the gems in the same column and row) \n"
-            +           "  -x color gem (destroys all gems of the same color) \n"
-            +           "\n"
-            +           "It is recommended that you zoom in until this help screen fits the\n"
-            +           "entire screen\n"
+            +           "   # regular gem \n" 
+            +           "   o exploding gem (destroys all gems in a 3x3 area around this gem) \n"
+            +           "   + cross gem (destroys all the gems in the same column and row) \n"
+            +           "   x color gem (destroys all gems of the same color) \n"
             +           "\n"
             +           "Press enter to continue.";
         System.out.print( help );
@@ -361,12 +358,12 @@ public class Woo{
                     //Highlight the gems that will be destroyed
                     Gem.highlight( game, toDestroy, true );
                     Screen.updateBoard( game, numMoves, points );
-                    wait( 500 ); //wait .5 seconds (1000 milliseconds) before moving on to destroying the gems
+                    wait( 750 ); //wait .5 seconds (1000 milliseconds) before moving on to destroying the gems
 
                     while( hasSuperGems( game, toDestroy ) ){
                         Gem.highlight( game, expandSuperGems( game, toDestroy ), true );       
                         Screen.updateBoard( game, numMoves, points );
-                        wait( 500 );
+                        wait( 750 );
                     }
 
                     //Destroy chain and increment move counter
@@ -385,12 +382,12 @@ public class Woo{
                         //Highlight gems that will be destroyed
                         Gem.highlight( game, toDestroy, true );
                         Screen.updateBoard( game, numMoves, points );
-                        wait( 500 );
+                        wait( 750 );
 
                         while( hasSuperGems( game, toDestroy ) ){
                             Gem.highlight( game, expandSuperGems( game, toDestroy ), true );       
                             Screen.updateBoard( game, numMoves, points );
-                            wait( 500 );
+                            wait( 750 );
                         }
                         points += toDestroy.size();
                         destroyChain( game, toDestroy );
