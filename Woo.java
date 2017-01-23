@@ -129,7 +129,14 @@ public class Woo{
 	    }
 	}
     }
-    
+
+    public static void replaceTheVoid(Gem[][] game){
+	for(int col = 0; col < game[0].length; col++){
+	    if(game[0][col].color == 30){
+		game[0][col] = new Gem();
+	    }
+	}
+    }
     
     public static void printHelp(){
         Screen.clear();
@@ -262,6 +269,7 @@ public class Woo{
 		    //Makes gems succumb to the inevitable force of Gravity
 		    for(int i = 0; i < 20; i++){
 			fall(game);
+			replaceTheVoid(game);
 		    }
 		    
                     //This block handles new chains formed by the destruction of old chains
@@ -275,6 +283,7 @@ public class Woo{
                         destroyChain( game, toDestroy );
 			for(int i = 0; i < 20; i++){
 			    fall(game);
+			    replaceTheVoid(game);
 			}
 		    }
                 } else { //If no chain formed, swap back the gems
