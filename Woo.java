@@ -101,6 +101,8 @@ public class Woo{
     public static void destroyChain( Gem[][] game, ArrayList<Integer[]> toDestroy ){
         int gemType; 
         for( Integer[] i: toDestroy ){
+	    game [i[0]] [i[1]] = new Gem(30);
+	    /*
             gemType = (int) (Math.random() * 20);
             if (gemType == 1) {
                 game [i[0]] [i[1]] = new CrossGem();
@@ -114,9 +116,21 @@ public class Woo{
             else {
                 game[ i[0] ][ i[1] ] = new Gem();
             }
+	    */
         }
     }
 
+    public static void fall( Gem[][] game){
+	for(int row = 0; row < game.length - 1; row++){
+	    for(int col = 0; col < game[0].length; col++){
+		if(game[row + 1][col].color == 30){
+		    swap(game, row, col, row + 1, col);
+		}
+	    }
+	}
+    }
+    
+    
     public static void printHelp(){
         Screen.clear();
         String help =   " ================ BEJEWELED ================ \n"
@@ -242,9 +256,14 @@ public class Woo{
                     wait( 1000 ); //wait 1 second (1000 milliseconds) before moving on to destroying the gems
 
                     //Destroy chain and increment move counter
-		            destroyChain( game, toDestroy );
-                    numMoves++;
+		    destroyChain( game, toDestroy );
+		    numMoves++;
 
+		    //Makes gems succumb to the inevitable force of Gravity
+		    for(int i = 0; i < 20; i++){
+			fall(game);
+		    }
+		    
                     //This block handles new chains formed by the destruction of old chains
                     while( ( toDestroy = ChainItems.chainItems( game ) ).size() >= 3  ){
                         //Highlight gems that will be destroyed
@@ -254,7 +273,10 @@ public class Woo{
 
                         points += toDestroy.size();
                         destroyChain( game, toDestroy );
-                    }
+			for(int i = 0; i < 20; i++){
+			    fall(game);
+			}
+		    }
                 } else { //If no chain formed, swap back the gems
                     swap( game, sGem[0][0], sGem[0][1], sGem[1][0], sGem[1][1] );   
                 }

@@ -37,7 +37,10 @@ public class Gem{
     }
     
     public boolean equals(Gem other){
-	return color == other.color;
+	if (color != 30){
+	    return color == other.color;
+	}
+	return false;
     }
 
     public int getColor(){
