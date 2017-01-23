@@ -134,25 +134,30 @@ public class Woo{
 	     }
 	 }
     }
-    
+
     public static void printHelp(){
         Screen.clear();
-        String help =   " ================ BEJEWELED ================ \n"
-            +           " \n"
-            +           " CONTROLS: \n" 
-            +           "   w e     Enter w, a, s, or d to move the cursor.\n"
-            +           " a s d     Press e to select/deselect the current gem. \n"
-            +           " \n"
-            +           " GAMEPLAY: Select two gems to swap them. \n"
-            +           "           Swaps are only allowed if they result in a chain of 3 or more gems. \n"
-            +           "           Get a chain of 3 gems in a row to destroy the chain. \n"
-            +           " \n"
-            +           " SUPER GEMS: # regular gem \n" 
-            +           "             o exploding gem (destroys all gems in a 3x3 area around this gem) \n"
-            +           "             + cross gem (destroys all the gems in the same column and row) \n "
-            +           "            x color gem (destroys all gems of the same color) \n"
-            +           " \n"
-            +           " Press enter to continue.";
+        String help =   "================ BEJEWELED ================ \n"
+            +           "\n"
+            +           "CONTROLS: \n" 
+            +           "  w e     Enter w, a, s, or d to move the cursor.\n"
+            +           "a s d     Press e to select/deselect the current gem. \n"
+            +           "\n"
+            +           "GAMEPLAY: Select two gems to swap them. \n"
+            +           "          Swaps are only allowed if they result in a chain of\n"
+            +           "          3 or more gems. \n"
+            +           "          Get a chain of 3 gems in a row to destroy the chain.\n"
+            +           "\n"
+            +           "SUPER GEMS: \n"
+            +           "  -# regular gem \n" 
+            +           "  -o exploding gem (destroys all gems in a 3x3 area around this gem) \n"
+            +           "  -+ cross gem (destroys all the gems in the same column and row) \n"
+            +           "  -x color gem (destroys all gems of the same color) \n"
+            +           "\n"
+            +           "It is recommended that you zoom in until this help screen fits the\n"
+            +           "entire screen\n"
+            +           "\n"
+            +           "Press enter to continue.";
         System.out.print( help );
     }
 
@@ -161,6 +166,11 @@ public class Woo{
         Scanner sc = new Scanner( System.in );
         String s;
 
+        printHelp();
+        Screen.promptUser( sc ); //Press enter to continue
+        
+        boolean playAgain = true;
+        while( playAgain ){
         //Initial values
         int numMoves = 0;
         int numSelectedGems = 0;
@@ -169,8 +179,6 @@ public class Woo{
         int row = 0;
         int col = 0;
 
-        printHelp();
-        Screen.promptUser( sc ); //Press enter to continue
 
         //Clear screen, initialize 2d Gem array, and print board
         Screen.clear();
@@ -303,8 +311,19 @@ public class Woo{
             }
 
         }
-        System.out.print( "\nGame over! Press enter to exit. " );
-        Screen.promptUser( sc );
+        System.out.println( "\nGame over!\nYour score was: " + points );
+        s = "";
+        while( !( s.equals("y") || s.equals("n") ) ){
+            s = Screen.promptUser( "Do you wish to play again (y/n)? ", sc );
+            if( s.equals("y") ){ //do nothing
+            } else if( s.equals("n") ){
+                playAgain = false;
+            } else {
+                System.out.print( "Input invalid. " );
+            }
+        }
+    }
+    System.out.println("");
     }
 }
 	
